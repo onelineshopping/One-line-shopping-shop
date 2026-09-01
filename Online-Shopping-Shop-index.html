@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Online Shopping Shop</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;color:#172033;background:#fff}
+.top{padding:8px 4%;font-size:13px;border-bottom:1px solid #eee;display:flex;gap:18px}.top a{color:#087c3b}.main{padding:16px 4%;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.brand{font-size:25px;font-weight:bold;color:#123d70}.brand span{color:#ff4b18}.search{flex:1;display:flex;min-width:250px}.search input{flex:1;padding:13px;border:1px solid #ddd;border-radius:8px 0 0 8px}.search button{padding:13px 20px;border:0;background:#ff4b18;color:#fff;border-radius:0 8px 8px 0}
+nav{background:#087c3b;color:white;padding:12px 4%;display:flex;gap:25px;overflow:auto;white-space:nowrap}nav a{color:#fff;text-decoration:none}.hero{margin:18px 3%;padding:40px 6%;border-radius:18px;background:linear-gradient(120deg,#eef9ed,#fff0d8);display:flex;justify-content:space-between;align-items:center}.hero h1{font-size:40px;margin:8px 0}.hero h1 span{color:#ff4b18}.hero button,.buy{background:#087c3b;color:#fff;border:0;border-radius:7px;padding:11px 18px;font-weight:bold}.art{font-size:65px;text-align:center}.section{padding:10px 4%}.cats,.products{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.cat,.product{border:1px solid #e5e7eb;border-radius:12px;padding:12px;text-align:center}.cat{background:#f8f9fa;cursor:pointer}.cat div{font-size:38px}.pic{font-size:60px;height:100px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:8px}.product h3{font-size:14px;min-height:38px}.price{color:#07508e;font-weight:bold}.old{text-decoration:line-through;color:#999;font-size:12px}.buy{width:100%;margin-top:9px;background:#ff4b18;cursor:pointer}.why{margin:25px 4%;padding:20px;background:#f5f8fb;border-radius:12px;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:15px}.why b,.why small{display:block}footer{background:#083b70;color:#fff;padding:28px 4%;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:700px){.hero h1{font-size:28px}.art{font-size:45px}.cats{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(2,1fr)}.why{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="top">📞 Hotline: 01410153135 <a href="https://wa.me/8801410153135">💬 WhatsApp: 01410153135</a></div>
+<div class="main"><div class="brand">🛒 Online <span>Shopping Shop</span></div><div class="search"><input id="q" placeholder="আপনি কী খুঁজছেন?"><button onclick="search()">🔍</button></div>🛒 কার্ট: <b id="count">0</b></div>
+<nav><a href="#">হোম</a><a href="#products">সব পণ্য</a><a href="#cats">খাবার ও মুদি</a><a href="#products">পোশাক</a><a href="#products">চা ও কফি</a><a href="#products">পার্সোনাল কেয়ার</a><a href="#products">ঘরোয়া পণ্য</a><a href="#products">ইলেকট্রনিক্স</a></nav>
+<section class="hero"><div><h1>দৈনন্দিন প্রয়োজনের<br><span>সবকিছু, এক জায়গায়</span></h1><p>খাবার, পোশাক, ইলেকট্রনিক্সসহ সব ধরনের পণ্য সহজে অর্ডার করুন।</p><button onclick="document.getElementById('products').scrollIntoView()">এখনই শপ করুন →</button></div><div class="art">🍚 🫗 ☕ 🧼<br>👕 📱 🎧</div></section>
+<section class="section" id="cats"><h2>জনপ্রিয় ক্যাটাগরি</h2><div class="cats" id="catGrid"></div></section>
+<section class="section" id="products"><h2>🔥 জনপ্রিয় পণ্য</h2><div class="products" id="grid"></div></section>
+<div class="why"><div>🚚<b>দ্রুত ডেলিভারি</b><small>সারা দেশে</small></div><div>💵<b>Cash on Delivery</b><small>সহজ পেমেন্ট</small></div><div>🛡️<b>নিরাপদ অর্ডার</b><small>বিশ্বস্ত সেবা</small></div><div>💬<b>WhatsApp সাপোর্ট</b><small>01410153135</small></div></div>
+<footer><div><h2>Online Shopping Shop</h2><p>দৈনন্দিন প্রয়োজনের সবকিছু, এক জায়গায়।</p></div><div>WhatsApp: 01410153135<br>Hotline: 01410153135</div></footer>
+<script>
+const ps=[
+["সয়াবিন তেল ১ লিটার","খাবার ও মুদি",135,"🫗"],["মিনিকেট চাল ৫ কেজি","খাবার ও মুদি",450,"🍚"],["BRU কফি ২০০ গ্রাম","চা ও কফি",275,"☕"],["লাক্স সাবান ১০০ গ্রাম","পার্সোনাল কেয়ার",69,"🧼"],["জেন্টস কটন শার্ট","পোশাক",799,"👔"],["Realme Buds T300","ইলেকট্রনিক্স",1990,"🎧"],["গ্রিন টি ২০০ গ্রাম","চা ও কফি",280,"🍵"],["ডিশওয়াশ ৫০০ মি.লি.","ঘরোয়া পণ্য",110,"🧴"]];
+let cart=0;
+const cats=[["🍚","খাবার ও মুদি"],["👗","পোশাক"],["☕","চা ও কফি"],["🧴","পার্সোনাল কেয়ার"],["🧹","ঘরোয়া পণ্য"],["🎧","ইলেকট্রনিক্স"]];
+function render(a=ps){grid.innerHTML=a.map((p,i)=>`<div class="product"><div class="pic">${p[3]}</div><h3>${p[0]}</h3><div class="price">৳${p[2]}</div><button class="buy" onclick="add()">কার্টে যোগ করুন</button></div>`).join("")}
+function add(){cart++;count.textContent=cart;alert("পণ্যটি কার্টে যোগ হয়েছে।")}
+function search(){let q=document.getElementById("q").value.toLowerCase();render(ps.filter(p=>(p[0]+p[1]).toLowerCase().includes(q)))}
+catGrid.innerHTML=cats.map(c=>`<div class="cat" onclick="render(ps.filter(p=>p[1]=='${c[1]}'))"><div>${c[0]}</div><b>${c[1]}</b></div>`).join("");
+render();
+</script>
+</body>
+</html>
