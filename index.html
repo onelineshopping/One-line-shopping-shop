@@ -1,41 +1,25 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>অনলাইন শপিং শপ</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header>
-  <h2>🛍️ অনলাইন শপিং শপ</h2>
-  <button onclick="showCart()">🛒 কার্ট <span id="count">0</span></button>
-</header>
-
-<section class="hero">
-  <h1>স্বাগতম অনলাইন শপিং শপে</h1>
-  <p>আপনার পছন্দের পণ্য সহজে খুঁজুন এবং কার্টে যোগ করুন।</p>
-  <a href="#products">পণ্য দেখুন</a>
-</section>
-
-<main id="products">
-  <h2>আমাদের পণ্য</h2>
-  <input id="search" placeholder="পণ্য খুঁজুন...">
-
-  <div id="productsList"></div>
-</main>
-
-<div id="cart" class="cart">
-  <button onclick="hideCart()">✕</button>
-  <h2>আপনার কার্ট</h2>
-  <div id="cartItems"></div>
-  <h3>মোট: ৳<span id="total">0</span></h3>
-  <button onclick="order()">অর্ডার করতে যোগাযোগ করুন</button>
-</div>
-
-<footer>© 2026 অনলাইন শপিং শপ — সর্বস্বত্ব সংরক্ষিত</footer>
-
-<script src="script.js"></script>
-</body>
+<!DOCTYPE html>  <html lang="bn">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width,initial-scale=1">  
+<title>অনলাইন শপিং শপ</title>  
+<link rel="stylesheet" href="style.css">  
+</head>  
+<body>  <header>  
+  <h2>🛍️ অনলাইন শপিং শপ</h2>  
+  <button onclick="showCart()">🛒 কার্ট <span id="count">0</span></button>  
+</header>  <section class="hero">  
+  <h1>স্বাগতম অনলাইন শপিং শপে</h1>  
+  <p>আপনার পছন্দের পণ্য সহজে খুঁজুন এবং কার্টে যোগ করুন।</p>  
+  <a href="#products">পণ্য দেখুন</a>  
+</section>  <main id="products">  
+  <h2>আমাদের পণ্য</h2>  
+  <input id="search" placeholder="পণ্য খুঁজুন...">    <div id="productsList"></div>  
+</main>  <div id="cart" class="cart">  
+  <button onclick="hideCart()">✕</button>  
+  <h2>আপনার কার্ট</h2>  
+  <div id="cartItems"></div>  
+  <h3>মোট: ৳<span id="total">0</span></h3>  
+  <button onclick="order()">অর্ডার করতে যোগাযোগ করুন</button>  
+</div>  <footer>© 2026 অনলাইন শপিং শপ — সর্বস্বত্ব সংরক্ষিত</footer>  <script src="script.js"></script>  </body>  
 </html>
