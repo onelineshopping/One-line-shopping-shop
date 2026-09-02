@@ -1,4 +1,3 @@
-
 const products = [
   { name: "টি-শার্ট", price: 450 },
   { name: "পাঞ্জাবি", price: 850 },
@@ -14,7 +13,9 @@ const search = document.getElementById("search");
 function displayProducts(items = products) {
   list.innerHTML = "";
 
-  items.forEach((product, index) => {
+  items.forEach((product) => {
+    const index = products.indexOf(product);
+
     list.innerHTML += `
       <div class="product">
         <h3>${product.name}</h3>
@@ -34,12 +35,14 @@ function addToCart(index) {
 function updateCart() {
   const cartItems = document.getElementById("cartItems");
   const total = document.getElementById("total");
+  const count = document.getElementById("count");
 
   cartItems.innerHTML = "";
   let sum = 0;
 
   cart.forEach((item, index) => {
     sum += item.price;
+
     cartItems.innerHTML += `
       <p>
         ${item.name} — ৳${item.price}
@@ -49,6 +52,7 @@ function updateCart() {
   });
 
   total.textContent = sum;
+  count.textContent = cart.length;
 }
 
 function removeFromCart(index) {
