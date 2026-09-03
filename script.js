@@ -1,8 +1,14 @@
 const products = [
-  { name: "টি-শার্ট", price: 450 },
-  { name: "পাঞ্জাবি", price: 850 },
-  { name: "জুতা", price: 1200 },
-  { name: "ব্যাগ", price: 650 }
+  {
+    name: "লেডিস ফ্লোরাল ড্রেস সেট",
+    oldPrice: 1200,
+    price: 850,
+    images: [
+      "IMG-20260807-WA0043.jpg",
+      "IMG-20260807-WA0045.jpg",
+      "IMG-20260807-WA0046.jpg"
+    ]
+  }
 ];
 
 let cart = [];
@@ -18,9 +24,24 @@ function displayProducts(items = products) {
 
     list.innerHTML += `
       <div class="product">
+        ${product.images.map(image => `
+          <img src="${image}" alt="${product.name}"
+               style="width:100%; max-width:300px; display:block; margin:10px auto; border-radius:10px;">
+        `).join("")}
+
         <h3>${product.name}</h3>
-        <p>মূল্য: ৳${product.price}</p>
-        <button onclick="addToCart(${index})">কার্টে যোগ করুন</button>
+
+        <p style="text-decoration:line-through;">
+          মূল্য: ৳${product.oldPrice}
+        </p>
+
+        <p style="font-size:20px; font-weight:bold;">
+          🔥 ডিসকাউন্ট মূল্য: ৳${product.price}
+        </p>
+
+        <button onclick="addToCart(${index})">
+          কার্টে যোগ করুন
+        </button>
       </div>
     `;
   });
