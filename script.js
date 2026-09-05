@@ -17,17 +17,34 @@ let cart = [];
 const list = document.getElementById("productsList");
 const search = document.getElementById("search");
 
+
+/* =========================================
+   PRODUCTS DISPLAY
+========================================= */
+
 function displayProducts(items = products) {
+
   list.innerHTML = "";
 
   items.forEach((product) => {
+
     const index = products.indexOf(product);
 
     list.innerHTML += `
       <div class="product">
+
         ${product.images.map(image => `
-          <img src="${image}" alt="${product.name}"
-               style="width:100%; max-width:300px; display:block; margin:10px auto; border-radius:10px;">
+          <img
+            src="${image}"
+            alt="${product.name}"
+            style="
+              width:100%;
+              max-width:300px;
+              display:block;
+              margin:10px auto;
+              border-radius:10px;
+            "
+          >
         `).join("")}
 
         <h3>${product.name}</h3>
@@ -36,53 +53,134 @@ function displayProducts(items = products) {
           মূল্য: ৳${product.oldPrice}
         </p>
 
-        <p style="font-size:20px; font-weight:bold;">
+        <p style="
+          font-size:20px;
+          font-weight:bold;
+        ">
           🔥 ডিসকাউন্ট মূল্য: ৳${product.price}
         </p>
 
-        <button onclick="addToCart(${index})">
-          কার্টে যোগ করুন
+        <button
+          onclick="orderProduct(${index})"
+          style="
+            width:100%;
+            padding:13px;
+            border:none;
+            border-radius:8px;
+            background:#087f23;
+            color:white;
+            font-size:17px;
+            font-weight:bold;
+            cursor:pointer;
+          "
+        >
+          🛍️ অর্ডার করুন
         </button>
+
       </div>
     `;
   });
 }
 
-function addToCart(index) {
-  const existingItem = cart.find(item => item.productIndex === index);
+
+/* =========================================
+   DIRECT ORDER BUTTON
+========================================= */
+
+function orderProduct(index) {
+
+  const existingItem =
+    cart.find(item => item.productIndex === index);
 
   if (existingItem) {
+
     existingItem.quantity += 1;
+
   } else {
+
     cart.push({
       productIndex: index,
       quantity: 1
     });
+
   }
 
   updateCart();
-  alert("পণ্যটি কার্টে যোগ হয়েছে");
+
+  order();
 }
 
+
+/* =========================================
+   CART
+========================================= */
+
+function addToCart(index) {
+
+  const existingItem =
+    cart.find(item => item.productIndex === index);
+
+  if (existingItem) {
+
+    existingItem.quantity += 1;
+
+  } else {
+
+    cart.push({
+      productIndex: index,
+      quantity: 1
+    });
+
+  }
+
+  updateCart();
+
+}
+
+
+/* =========================================
+   UPDATE CART
+========================================= */
+
 function updateCart() {
-  const cartItems = document.getElementById("cartItems");
-  const total = document.getElementById("total");
-  const count = document.getElementById("count");
+
+  const cartItems =
+    document.getElementById("cartItems");
+
+  const total =
+    document.getElementById("total");
+
+  const count =
+    document.getElementById("count");
 
   cartItems.innerHTML = "";
 
   let sum = 0;
   let totalQuantity = 0;
+  let totalWeight = 0;
+
 
   cart.forEach((cartItem, index) => {
-    const item = products[cartItem.productIndex];
-    const subtotal = item.price * cartItem.quantity;
+
+    const item =
+      products[cartItem.productIndex];
+
+    const subtotal =
+      item.price * cartItem.quantity;
 
     sum += subtotal;
+
     totalQuantity += cartItem.quantity;
 
+    totalWeight +=
+      item.weight * cartItem.quantity;
+
+
     cartItems.innerHTML += `
-      <div style="border-bottom:1px solid #ddd; padding:10px 0;">
+      <div style="
+        border-bottom:1px solid #ddd;
+        padding:10px 0;
+      ">
 
         <p style="font-weight:bold;">
           ${item.name}
@@ -90,30 +188,49 @@ function updateCart() {
 
         <p>
           ৳${item.price} × ${cartItem.quantity} পিস
-          = <strong>৳${subtotal}</strong>
+          =
+          <strong>৳${subtotal}</strong>
         </p>
 
-        <div style="display:flex; align-items:center; gap:10px;">
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:10px;
+        ">
 
           <button
             onclick="decreaseQuantity(${index})"
-            style="padding:5px 12px; font-size:18px;">
+            style="
+              padding:5px 12px;
+              font-size:18px;
+            "
+          >
             −
           </button>
 
-          <span style="font-size:18px; font-weight:bold;">
+          <span style="
+            font-size:18px;
+            font-weight:bold;
+          ">
             ${cartItem.quantity}
           </span>
 
           <button
             onclick="increaseQuantity(${index})"
-            style="padding:5px 12px; font-size:18px;">
+            style="
+              padding:5px 12px;
+              font-size:18px;
+            "
+          >
             +
           </button>
 
           <button
             onclick="removeFromCart(${index})"
-            style="padding:5px 10px;">
+            style="
+              padding:5px 10px;
+            "
+          >
             🗑️
           </button>
 
@@ -123,36 +240,82 @@ function updateCart() {
     `;
   });
 
+
   total.textContent = sum;
+
   count.textContent = totalQuantity;
+
 }
+
+
+/* =========================================
+   QUANTITY +
+========================================= */
 
 function increaseQuantity(index) {
+
   cart[index].quantity += 1;
+
   updateCart();
+
 }
 
+
+/* =========================================
+   QUANTITY -
+========================================= */
+
 function decreaseQuantity(index) {
+
   if (cart[index].quantity > 1) {
+
     cart[index].quantity -= 1;
+
   } else {
+
     cart.splice(index, 1);
+
   }
 
   updateCart();
+
 }
+
+
+/* =========================================
+   REMOVE PRODUCT
+========================================= */
 
 function removeFromCart(index) {
+
   cart.splice(index, 1);
+
   updateCart();
+
 }
+
+
+/* =========================================
+   SHOW CART
+========================================= */
 
 function showCart() {
-  document.getElementById("cart").style.display = "block";
+
+  document.getElementById("cart")
+    .style.display = "block";
+
 }
 
+
+/* =========================================
+   HIDE CART
+========================================= */
+
 function hideCart() {
-  document.getElementById("cart").style.display = "none";
+
+  document.getElementById("cart")
+    .style.display = "none";
+
 }
 
 
@@ -163,36 +326,59 @@ function hideCart() {
 function order() {
 
   if (cart.length === 0) {
-    alert("আপনার কার্ট খালি");
+
+    alert("আপনার অর্ডার তালিকা খালি।");
+
     return;
+
   }
 
-  /* মোট হিসাব */
+
+  /* TOTAL CALCULATION */
 
   let productTotal = 0;
+
   let totalWeight = 0;
+
   let totalQuantity = 0;
 
-  cart.forEach((cartItem) => {
-    const item = products[cartItem.productIndex];
 
-    productTotal += item.price * cartItem.quantity;
-    totalWeight += item.weight * cartItem.quantity;
-    totalQuantity += cartItem.quantity;
+  cart.forEach((cartItem) => {
+
+    const item =
+      products[cartItem.productIndex];
+
+    productTotal +=
+      item.price * cartItem.quantity;
+
+    totalWeight +=
+      item.weight * cartItem.quantity;
+
+    totalQuantity +=
+      cartItem.quantity;
+
   });
 
 
-  /* অর্ডার ফর্ম তৈরি */
+  /* REMOVE OLD FORM */
 
-  const oldForm = document.getElementById("orderFormBox");
+  const oldForm =
+    document.getElementById("orderFormBox");
 
   if (oldForm) {
+
     oldForm.remove();
+
   }
 
-  const formBox = document.createElement("div");
+
+  /* CREATE FORM */
+
+  const formBox =
+    document.createElement("div");
 
   formBox.id = "orderFormBox";
+
 
   formBox.style.cssText = `
     position:fixed;
@@ -208,16 +394,22 @@ function order() {
   `;
 
 
-  /* অর্ডারের পণ্য */
+  /* ORDER PRODUCTS */
 
   let productsHTML = "";
 
+
   cart.forEach((cartItem, index) => {
 
-    const item = products[cartItem.productIndex];
-    const subtotal = item.price * cartItem.quantity;
+    const item =
+      products[cartItem.productIndex];
+
+    const subtotal =
+      item.price * cartItem.quantity;
+
 
     productsHTML += `
+
       <div style="
         background:#f8f8f8;
         border-radius:10px;
@@ -225,19 +417,26 @@ function order() {
         margin-bottom:8px;
       ">
 
-        <strong>${index + 1}. ${item.name}</strong>
+        <strong>
+          ${index + 1}. ${item.name}
+        </strong>
 
         <br>
 
         <span>
           ${cartItem.quantity} পিস × ৳${item.price}
-          = <strong>৳${subtotal}</strong>
+          =
+          <strong>৳${subtotal}</strong>
         </span>
 
       </div>
+
     `;
+
   });
 
+
+  /* FORM HTML */
 
   formBox.innerHTML = `
 
@@ -250,6 +449,7 @@ function order() {
       box-sizing:border-box;
       box-shadow:0 5px 25px rgba(0,0,0,0.3);
     ">
+
 
       <div style="
         display:flex;
@@ -265,6 +465,7 @@ function order() {
           🛍️ অর্ডার ফর্ম
         </h2>
 
+
         <button
           type="button"
           onclick="closeOrderForm()"
@@ -276,7 +477,8 @@ function order() {
             height:40px;
             border-radius:50%;
             cursor:pointer;
-          ">
+          "
+        >
           ✕
         </button>
 
@@ -295,7 +497,10 @@ function order() {
 
       <form id="customerOrderForm">
 
-        <label><strong>👤 আপনার নাম *</strong></label>
+
+        <label>
+          <strong>👤 আপনার নাম *</strong>
+        </label>
 
         <input
           type="text"
@@ -314,7 +519,9 @@ function order() {
         >
 
 
-        <label><strong>📱 মোবাইল / WhatsApp নম্বর *</strong></label>
+        <label>
+          <strong>📱 মোবাইল / WhatsApp নম্বর *</strong>
+        </label>
 
         <input
           type="tel"
@@ -333,7 +540,9 @@ function order() {
         >
 
 
-        <label><strong>🏠 সম্পূর্ণ ডেলিভারি ঠিকানা *</strong></label>
+        <label>
+          <strong>🏠 সম্পূর্ণ ডেলিভারি ঠিকানা *</strong>
+        </label>
 
         <textarea
           id="customerAddress"
@@ -353,7 +562,9 @@ function order() {
         ></textarea>
 
 
-        <label><strong>🏡 গ্রাম / মহল্লা *</strong></label>
+        <label>
+          <strong>🏡 গ্রাম / মহল্লা *</strong>
+        </label>
 
         <input
           type="text"
@@ -372,7 +583,9 @@ function order() {
         >
 
 
-        <label><strong>🏢 থানা *</strong></label>
+        <label>
+          <strong>🏢 থানা *</strong>
+        </label>
 
         <input
           type="text"
@@ -391,7 +604,9 @@ function order() {
         >
 
 
-        <label><strong>📍 জেলা *</strong></label>
+        <label>
+          <strong>📍 জেলা *</strong>
+        </label>
 
         <input
           type="text"
@@ -410,7 +625,9 @@ function order() {
         >
 
 
-        <label><strong>📮 পোস্ট / পোস্ট অফিস *</strong></label>
+        <label>
+          <strong>📮 পোস্ট / পোস্ট অফিস *</strong>
+        </label>
 
         <input
           type="text"
@@ -429,7 +646,9 @@ function order() {
         >
 
 
-        <label><strong>🚚 ডেলিভারি এলাকা *</strong></label>
+        <label>
+          <strong>🚚 ডেলিভারি এলাকা *</strong>
+        </label>
 
         <select
           id="deliveryLocation"
@@ -446,14 +665,25 @@ function order() {
           "
         >
 
-          <option value="">ডেলিভারি এলাকা নির্বাচন করুন</option>
-          <option value="ঢাকা">ঢাকার ভিতরে</option>
-          <option value="বাইরে">ঢাকার বাইরে</option>
+          <option value="">
+            ডেলিভারি এলাকা নির্বাচন করুন
+          </option>
+
+          <option value="ঢাকা">
+            ঢাকার ভিতরে
+          </option>
+
+          <option value="বাইরে">
+            ঢাকার বাইরে
+          </option>
 
         </select>
 
 
-        <label><strong>📝 অতিরিক্ত নির্দেশনা</strong> (ঐচ্ছিক)</label>
+        <label>
+          <strong>📝 অতিরিক্ত নির্দেশনা</strong>
+          (ঐচ্ছিক)
+        </label>
 
         <textarea
           id="customerNote"
@@ -479,6 +709,7 @@ function order() {
           📦 আপনার অর্ডার
         </h3>
 
+
         ${productsHTML}
 
 
@@ -489,25 +720,32 @@ function order() {
           margin-top:12px;
         ">
 
+
           <p style="margin:5px 0;">
             📦 মোট পিস:
             <strong>${totalQuantity}</strong>
           </p>
+
 
           <p style="margin:5px 0;">
             ⚖️ মোট ওজন:
             <strong>${totalWeight.toFixed(2)} কেজি</strong>
           </p>
 
+
           <p style="margin:5px 0;">
             💵 পণ্যের মোট মূল্য:
             <strong>৳${productTotal}</strong>
           </p>
 
+
           <p style="margin:5px 0;">
             🚚 ডেলিভারি চার্জ:
-            <strong id="formDeliveryCharge">এলাকা নির্বাচন করুন</strong>
+            <strong id="formDeliveryCharge">
+              এলাকা নির্বাচন করুন
+            </strong>
           </p>
+
 
           <p style="
             margin:10px 0 0;
@@ -515,8 +753,13 @@ function order() {
             border-top:1px solid #ccc;
             font-size:19px;
           ">
+
             💰 সর্বমোট:
-            <strong id="formGrandTotal">এলাকা নির্বাচন করুন</strong>
+
+            <strong id="formGrandTotal">
+              এলাকা নির্বাচন করুন
+            </strong>
+
           </p>
 
         </div>
@@ -537,7 +780,7 @@ function order() {
             cursor:pointer;
           "
         >
-          📲 WhatsApp-এ অর্ডার কনফার্ম করুন
+          ✅ অর্ডার কনফার্ম করুন
         </button>
 
 
@@ -558,16 +801,20 @@ function order() {
           বাতিল
         </button>
 
+
       </form>
 
     </div>
+
   `;
 
 
   document.body.appendChild(formBox);
 
 
-  /* ডেলিভারি চার্জ ও মোট আপডেট */
+  /* =========================================
+     DELIVERY CHARGE
+  ========================================= */
 
   const locationSelect =
     document.getElementById("deliveryLocation");
@@ -581,7 +828,9 @@ function order() {
 
   function updateFormTotal() {
 
-    const location = locationSelect.value;
+    const location =
+      locationSelect.value;
+
 
     if (!location) {
 
@@ -592,6 +841,7 @@ function order() {
         "এলাকা নির্বাচন করুন";
 
       return;
+
     }
 
 
@@ -608,6 +858,7 @@ function order() {
 
       deliveryCharge +=
         extraWeight * 30;
+
     }
 
 
@@ -620,6 +871,7 @@ function order() {
 
     grandTotalText.textContent =
       "৳" + grandTotal;
+
   }
 
 
@@ -629,213 +881,207 @@ function order() {
   );
 
 
-  /* Form Submit */
+  /* =========================================
+     FORM SUBMIT
+  ========================================= */
 
   document
     .getElementById("customerOrderForm")
-    .addEventListener("submit", function(event) {
+    .addEventListener(
+      "submit",
+      function(event) {
 
-      event.preventDefault();
-
-
-      const name =
-        document.getElementById("customerName")
-          .value.trim();
-
-      const phone =
-        document.getElementById("customerPhone")
-          .value.trim();
-
-      const address =
-        document.getElementById("customerAddress")
-          .value.trim();
-
-      const village =
-        document.getElementById("customerVillage")
-          .value.trim();
-
-      const thana =
-        document.getElementById("customerThana")
-          .value.trim();
-
-      const district =
-        document.getElementById("customerDistrict")
-          .value.trim();
-
-      const post =
-        document.getElementById("customerPost")
-          .value.trim();
-
-      const location =
-        document.getElementById("deliveryLocation")
-          .value;
-
-      const note =
-        document.getElementById("customerNote")
-          .value.trim();
+        event.preventDefault();
 
 
-      if (!name ||
+        const name =
+          document
+            .getElementById("customerName")
+            .value
+            .trim();
+
+
+        const phone =
+          document
+            .getElementById("customerPhone")
+            .value
+            .trim();
+
+
+        const address =
+          document
+            .getElementById("customerAddress")
+            .value
+            .trim();
+
+
+        const village =
+          document
+            .getElementById("customerVillage")
+            .value
+            .trim();
+
+
+        const thana =
+          document
+            .getElementById("customerThana")
+            .value
+            .trim();
+
+
+        const district =
+          document
+            .getElementById("customerDistrict")
+            .value
+            .trim();
+
+
+        const post =
+          document
+            .getElementById("customerPost")
+            .value
+            .trim();
+
+
+        const location =
+          document
+            .getElementById("deliveryLocation")
+            .value;
+
+
+        const note =
+          document
+            .getElementById("customerNote")
+            .value
+            .trim();
+
+
+        /* REQUIRED CHECK */
+
+        if (
+          !name ||
           !phone ||
           !address ||
           !village ||
           !thana ||
           !district ||
           !post ||
-          !location) {
+          !location
+        ) {
 
-        alert(
-          "দয়া করে সব প্রয়োজনীয় তথ্য পূরণ করুন।"
+          alert(
+            "দয়া করে সব প্রয়োজনীয় তথ্য পূরণ করুন।"
+          );
+
+          return;
+
+        }
+
+
+        /* DELIVERY CHARGE */
+
+        let deliveryCharge =
+          location === "ঢাকা" ? 80 : 180;
+
+
+        if (totalWeight > 1) {
+
+          const extraWeight =
+            Math.ceil(totalWeight - 1);
+
+          deliveryCharge +=
+            extraWeight * 30;
+
+        }
+
+
+        const grandTotal =
+          productTotal + deliveryCharge;
+
+
+        /* ORDER MESSAGE */
+
+        let orderDetails = "";
+
+
+        cart.forEach((cartItem, index) => {
+
+          const item =
+            products[cartItem.productIndex];
+
+
+          const subtotal =
+            item.price * cartItem.quantity;
+
+
+          orderDetails +=
+            `${index + 1}. ${item.name}\n` +
+            `পরিমাণ: ${cartItem.quantity} পিস\n` +
+            `মূল্য: ৳${item.price} × ${cartItem.quantity} = ৳${subtotal}\n\n`;
+
+        });
+
+
+        const message =
+
+          `🛍️ নতুন অর্ডার\n\n` +
+
+          `👤 নাম: ${name}\n` +
+
+          `📱 মোবাইল / WhatsApp: ${phone}\n\n` +
+
+          `🏠 সম্পূর্ণ ঠিকানা:\n${address}\n\n` +
+
+          `🏡 গ্রাম / মহল্লা: ${village}\n` +
+
+          `🏢 থানা: ${thana}\n` +
+
+          `📍 জেলা: ${district}\n` +
+
+          `📮 পোস্ট / পোস্ট অফিস: ${post}\n\n` +
+
+          `🚚 ডেলিভারি এলাকা: ` +
+          `${location === "ঢাকা" ? "ঢাকার ভিতরে" : "ঢাকার বাইরে"}\n\n` +
+
+          `📦 অর্ডারের বিবরণ:\n` +
+
+          `${orderDetails}` +
+
+          `📦 মোট পিস: ${totalQuantity}\n` +
+
+          `⚖️ মোট ওজন: ` +
+          `${totalWeight.toFixed(2)} কেজি\n` +
+
+          `💵 পণ্যের মোট মূল্য: ৳${productTotal}\n` +
+
+          `🚚 ডেলিভারি চার্জ: ৳${deliveryCharge}\n` +
+
+          `💰 সর্বমোট: ৳${grandTotal}\n\n` +
+
+          `📝 অতিরিক্ত নির্দেশনা: ` +
+          `${note || "নেই"}`;
+
+
+        /* WHATSAPP */
+
+        const whatsappNumber =
+          "8801410153135";
+
+
+        const whatsappURL =
+          "https://wa.me/" +
+          whatsappNumber +
+          "?text=" +
+          encodeURIComponent(message);
+
+
+        window.open(
+          whatsappURL,
+          "_blank"
         );
 
-        return;
       }
-
-
-      /* ডেলিভারি চার্জ */
-
-      let deliveryCharge =
-        location === "ঢাকা" ? 80 : 180;
-
-
-      if (totalWeight > 1) {
-
-        const extraWeight =
-          Math.ceil(totalWeight - 1);
-
-        deliveryCharge +=
-          extraWeight * 30;
-      }
-
-
-      const grandTotal =
-        productTotal + deliveryCharge;
-
-
-      /* WhatsApp Message */
-
-      let message =
-        "🛍️ Online Shopping Shop - নতুন অর্ডার\n\n";
-
-
-      message +=
-        "👤 নাম: " +
-        name +
-        "\n";
-
-      message +=
-        "📞 যোগাযোগ নাম্বার: " +
-        phone +
-        "\n";
-
-      message +=
-        "🏠 সম্পূর্ণ ঠিকানা: " +
-        address +
-        "\n";
-
-      message +=
-        "🏡 গ্রাম/মহল্লা: " +
-        village +
-        "\n";
-
-      message +=
-        "🏢 থানা: " +
-        thana +
-        "\n";
-
-      message +=
-        "📍 জেলা: " +
-        district +
-        "\n";
-
-      message +=
-        "📮 পোস্ট: " +
-        post +
-        "\n";
-
-      message +=
-        "🚚 ডেলিভারি এলাকা: " +
-        location +
-        "\n\n";
-
-
-      message +=
-        "📦 অর্ডারের বিবরণ:\n";
-
-
-      cart.forEach((cartItem, index) => {
-
-        const item =
-          products[cartItem.productIndex];
-
-        const subtotal =
-          item.price *
-          cartItem.quantity;
-
-
-        message +=
-          (index + 1) +
-          ". " +
-          item.name +
-          "\n   " +
-          cartItem.quantity +
-          " পিস × ৳" +
-          item.price +
-          " = ৳" +
-          subtotal +
-          "\n";
-      });
-
-
-      message +=
-        "\n📦 মোট পিস: " +
-        totalQuantity;
-
-      message +=
-        "\n⚖️ মোট ওজন: " +
-        totalWeight.toFixed(2) +
-        " কেজি";
-
-      message +=
-        "\n💵 পণ্যের মোট মূল্য: ৳" +
-        productTotal;
-
-      message +=
-        "\n🚚 ডেলিভারি চার্জ: ৳" +
-        deliveryCharge;
-
-      message +=
-        "\n💰 সর্বমোট: ৳" +
-        grandTotal;
-
-
-      if (note) {
-
-        message +=
-          "\n\n📝 অতিরিক্ত নির্দেশনা: " +
-          note;
-      }
-
-
-      /* তোমার WhatsApp নম্বর */
-
-      const whatsappNumber =
-        "8801410153135";
-
-
-      const whatsappURL =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(message);
-
-
-      window.open(
-        whatsappURL,
-        "_blank"
-      );
-
-    });
+    );
 
 }
 
@@ -850,7 +1096,9 @@ function closeOrderForm() {
     document.getElementById("orderFormBox");
 
   if (form) {
+
     form.remove();
+
   }
 
 }
@@ -866,17 +1114,21 @@ if (search) {
     "input",
     function() {
 
-      const text =
-        this.value.toLowerCase();
+      const searchText =
+        this.value
+          .toLowerCase()
+          .trim();
 
-      const filtered =
+
+      const filteredProducts =
         products.filter(product =>
           product.name
             .toLowerCase()
-            .includes(text)
+            .includes(searchText)
         );
 
-      displayProducts(filtered);
+
+      displayProducts(filteredProducts);
 
     }
   );
