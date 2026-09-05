@@ -95,7 +95,39 @@ function order() {
     return;
   }
 
-  alert("অর্ডার সফল হয়েছে");
+  const name = prompt("আপনার নাম লিখুন:");
+
+  if (!name) {
+    alert("দয়া করে আপনার নাম লিখুন");
+    return;
+  }
+
+  const address = prompt("আপনার সম্পূর্ণ ডেলিভারি ঠিকানা লিখুন:");
+
+  if (!address) {
+    alert("দয়া করে আপনার ডেলিভারি ঠিকানা লিখুন");
+    return;
+  }
+
+  let message = "🛍️ Online Shopping Shop - নতুন অর্ডার%0A%0A";
+  message += "👤 নাম: " + name + "%0A";
+  message += "🏠 ঠিকানা: " + address + "%0A%0A";
+  message += "📦 অর্ডারের বিবরণ:%0A";
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    message += (index + 1) + ". " + item.name + " - ৳" + item.price + "%0A";
+    total += item.price;
+  });
+
+  message += "%0A💰 মোট মূল্য: ৳" + total;
+
+  const whatsappNumber = "8801410153135";
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber + "?text=" + message;
+
+  window.open(whatsappURL, "_blank");
 }
 
 if (search) {
