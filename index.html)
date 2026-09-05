@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>অনলাইন শপিং শপ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#f5f7f9;
+  color:#222;
+}
+
+header{
+  background:linear-gradient(135deg,#087f23,#0b5d1e);
+  color:white;
+  padding:20px 15px;
+  text-align:center;
+}
+
+header h1{
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+header p{
+  font-size:14px;
+}
+
+.container{
+  width:95%;
+  max-width:1100px;
+  margin:20px auto;
+}
+
+.search-box{
+  margin-bottom:20px;
+}
+
+.search-box input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:16px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:18px;
+}
+
+.product{
+  background:white;
+  border-radius:15px;
+  padding:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.product img{
+  width:100%;
+  height:250px;
+  object-fit:contain;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.product h3{
+  margin:8px 0;
+  font-size:19px;
+}
+
+.old-price{
+  text-decoration:line-through;
+  color:#777;
+}
+
+.price{
+  color:#087f23;
+  font-size:21px;
+  font-weight:bold;
+  margin:7px 0 12px;
+}
+
+button{
+  border:none;
+  border-radius:8px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.add-btn{
+  background:#087f23;
+  color:white;
+  width:100%;
+}
+
+.add-btn:hover{
+  background:#05651b;
+}
+
+.cart-section{
+  background:white;
+  margin-top:25px;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.cart-section h2{
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.cart-item{
+  border-bottom:1px solid #ddd;
+  padding:12px 0;
+}
+
+.cart-item:last-child{
+  border-bottom:none;
+}
+
+.cart-name{
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:8px 0;
+}
+
+.qty button{
+  width:35px;
+  height:35px;
+  padding:0;
+  font-size:22px;
+  background:#087f23;
+  color:white;
+}
+
+.qty span{
+  min-width:30px;
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.remove-btn{
+  background:#dc3545;
+  color:white;
+  padding:7px 12px;
+  font-size:14px;
+}
+
+.summary{
+  background:#f0f8f2;
+  padding:15px;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+.summary p{
+  display:flex;
+  justify-content:space-between;
+  margin:8px 0;
+}
+
+.grand-total{
+  font-size:21px;
+  font-weight:bold;
+  color:#087f23;
+  border-top:1px solid #ccc;
+  padding-top:10px;
+}
+
+.order-form{
+  margin-top:20px;
+}
+
+.order-form h3{
+  margin-bottom:12px;
+}
+
+.order-form input,
+.order-form textarea{
+  width:100%;
+  padding:13px;
+  margin-bottom:12px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  font-size:16px;
+}
+
+.order-form textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.confirm-btn{
+  width:100%;
+  background:#25D366;
+  color:white;
+  font-weight:bold;
+  font-size:18px;
+  padding:14px;
+}
+
+.empty{
+  text-align:center;
+  color:#777;
+  padding:15px;
+}
+
+footer{
+  text-align:center;
+  padding:25px 10px;
+  color:#777;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🛍️ অনলাইন শপিং শপ</h1>
+  <p>আপনার পছন্দের পণ্য সহজেই অর্ডার করুন</p>
+</header>
+
+<div class="container">
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="search"
+      placeholder="🔍 পণ্য খুঁজুন..."
+      oninput="searchProducts()"
+    >
+  </div>
+
+  <div class="products" id="productsList"></div>
+
+  <div class="cart-section">
+    <h2>🛒 আপনার কার্ট</h2>
+
+    <div id="cartList">
+      <div class="empty">কার্টে এখনো কোনো পণ্য নেই।</div>
+    </div>
+
+    <div class="summary">
+
+      <p>
+        <span>মোট পণ্য:</span>
+        <span id="totalItems">0 টি</span>
+      </p>
+
+      <p>
+        <span>মোট ওজন:</span>
+        <span id="totalWeight">0 কেজি</span>
+      </p>
+
+      <p>
+        <span>পণ্যের মোট মূল্য:</span>
+        <span>৳<span id="subtotal">0</span></span>
+      </p>
+
+      <p>
+        <span>ডেলিভারি চার্জ:</span>
+        <span>৳<span id="deliveryCharge">0</span></span>
+      </p>
+
+      <p class="grand-total">
+        <span>সর্বমোট:</span>
+        <span>৳<span id="grandTotal">0</span></span>
+      </p>
+
+    </div>
+
+    <div class="order-form">
+
+      <h3>📦 অর্ডারের তথ্য</h3>
+
+      <input
+        type="text"
+        id="customerName"
+        placeholder="আপনার নাম লিখুন"
+      >
+
+      <input
+        type="tel"
+        id="customerPhone"
+        placeholder="আপনার মোবাইল নম্বর লিখুন"
+      >
+
+      <textarea
+        id="customerAddress"
+        placeholder="আপনার সম্পূর্ণ ডেলিভারি ঠিকানা লিখুন"
+      ></textarea>
+
+      <button class="confirm-btn" onclick="confirmOrder()">
+        📲 অর্ডার কনফার্ম করুন
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 অনলাইন শপিং শপ — সর্বস্বত্ব সংরক্ষিত
+</footer>
+
+
+<script>
+
+/* =========================
+   পণ্যের তালিকা
+========================= */
+
+const products = [
+
+  {
+    name:"লেডিস ফ্লোরাল ড্রেস সেট",
+    oldPrice:1200,
+    price:850,
+    weight:0.3,
+    images:[
+      "IMG-20260807-WA0043.jpg",
+      "IMG-20260807-WA0045.jpg",
+      "IMG-20260807-WA0046.jpg"
+    ]
+  }
+
+];
+
+
+/* =========================
+   কার্ট
+========================= */
+
+let cart = [];
+
+
+/* =========================
+   পণ্য দেখানো
+========================= */
+
+function displayProducts(items = products){
+
+  const list = document.getElementById("productsList");
+
+  list.innerHTML = "";
+
+  items.forEach((product)=>{
+
+    const index = products.indexOf(product);
+
+    list.innerHTML += `
+
+      <div class="product">
+
+        <img
+          src="${product.images[0]}"
+          alt="${product.name}"
+        >
+
+        <h3>${product.name}</h3>
+
+        <p class="old-price">
+          মূল্য: ৳${product.oldPrice}
+        </p>
+
+        <p class="price">
+          🔥 ডিসকাউন্ট মূল্য: ৳${product.price}
+        </p>
+
+        <button
+          class="add-btn"
+          onclick="addToCart(${index})"
+        >
+          🛒 কার্টে যোগ করুন
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+/* =========================
+   কার্টে পণ্য যোগ
+========================= */
+
+function addToCart(index){
+
+  const existing = cart.find(
+    item => item.index === index
+  );
+
+  if(existing){
+
+    existing.quantity++;
+
+  }else{
+
+    cart.push({
+      index:index,
+      quantity:1
+    });
+
+  }
+
+  updateCart();
+
+}
+
+
+/* =========================
+   পরিমাণ পরিবর্তন
+========================= */
+
+function changeQuantity(index, amount){
+
+  const item = cart.find(
+    item => item.index === index
+  );
+
+  if(!item) return;
+
+  item.quantity += amount;
+
+  if(item.quantity <= 0){
+
+    cart = cart.filter(
+      item => item.index !== index
+    );
+
+  }
+
+  updateCart();
+
+}
+
+
+/* =========================
+   কার্ট আপডেট
+========================= */
+
+function updateCart(){
+
+  const cartList =
+    document.getElementById("cartList");
+
+  if(cart.length === 0){
+
+    cartList.innerHTML =
+      `<div class="empty">
+        কার্টে এখনো কোনো পণ্য নেই।
+       </div>`;
+
+    document.getElementById("totalItems").innerText =
+      "0 টি";
+
+    document.getElementById("totalWeight").innerText =
+      "0 কেজি";
+
+    document.getElementById("subtotal").innerText =
+      "0";
+
+    document.getElementById("deliveryCharge").innerText =
+      "0";
+
+    document.getElementById("grandTotal").innerText =
+      "0";
+
+    return;
+  }
+
+
+  let totalItems = 0;
+  let totalWeight = 0;
+  let subtotal = 0;
+
+  cartList.innerHTML = "";
+
+
+  cart.forEach(item => {
+
+    const product = products[item.index];
+
+    const quantity = item.quantity;
+
+    const itemTotal =
+      product.price * quantity;
+
+    const itemWeight =
+      product.weight * quantity;
+
+    totalItems += quantity;
+
+    totalWeight += itemWeight;
+
+    subtotal += itemTotal;
+
+
+    cartList.innerHTML += `
+
+      <div class="cart-item">
+
+        <div class="cart-name">
+          ${product.name}
+        </div>
+
+        <div>
+          ৳${product.price} × ${quantity}
+          = <strong>৳${itemTotal}</strong>
+        </div>
+
+        <div>
+          ওজন: ${itemWeight.toFixed(2)} কেজি
+        </div>
+
+        <div class="qty">
+
+          <button
+            onclick="changeQuantity(${item.index},-1)"
+          >
+            −
+          </button>
+
+          <span>${quantity}</span>
+
+          <button
+            onclick="changeQuantity(${item.index},1)"
+          >
+            +
+          </button>
+
+        </div>
+
+        <button
+          class="remove-btn"
+          onclick="removeFromCart(${item.index})"
+        >
+          পণ্য বাদ দিন
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+
+  /*
+     ডেলিভারি চার্জ
+
+     ১ কেজি পর্যন্ত = ৳60
+     ১ কেজির বেশি হলে
+     প্রতি অতিরিক্ত কেজিতে = ৳20
+  */
+
+  let deliveryCharge = 60;
+
+  if(totalWeight > 1){
+
+    deliveryCharge =
+      60 + Math.ceil(totalWeight - 1) * 20;
+
+  }
+
+
+  const grandTotal =
+    subtotal + deliveryCharge;
+
+
+  document.getElementById("totalItems").innerText =
+    totalItems + " টি";
+
+  document.getElementById("totalWeight").innerText =
+    totalWeight.toFixed(2) + " কেজি";
+
+  document.getElementById("subtotal").innerText =
+    subtotal;
+
+  document.getElementById("deliveryCharge").innerText =
+    deliveryCharge;
+
+  document.getElementById("grandTotal").innerText =
+    grandTotal;
+
+}
+
+
+/* =========================
+   কার্ট থেকে পণ্য বাদ
+========================= */
+
+function removeFromCart(index){
+
+  cart = cart.filter(
+    item => item.index !== index
+  );
+
+  updateCart();
+
+}
+
+
+/* =========================
+   পণ্য সার্চ
+========================= */
+
+function searchProducts(){
+
+  const keyword =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+  const filtered =
+    products.filter(product =>
+      product.name
+      .toLowerCase()
+      .includes(keyword)
+    );
+
+  displayProducts(filtered);
+
+}
+
+
+/* =========================
+   অর্ডার কনফার্ম
+========================= */
+
+function confirmOrder(){
+
+  if(cart.length === 0){
+
+    alert("দয়া করে প্রথমে কার্টে একটি পণ্য যোগ করুন।");
+
+    return;
+  }
+
+
+  const name =
+    document.getElementById("customerName").value.trim();
+
+  const phone =
+    document.getElementById("customerPhone").value.trim();
+
+  const address =
+    document.getElementById("customerAddress").value.trim();
+
+
+  if(name === ""){
+
+    alert("দয়া করে আপনার নাম লিখুন।");
+
+    return;
+  }
+
+
+  if(phone === ""){
+
+    alert("দয়া করে আপনার মোবাইল নম্বর লিখুন।");
+
+    return;
+  }
+
+
+  if(address === ""){
+
+    alert("দয়া করে আপনার ডেলিভারি ঠিকানা লিখুন।");
+
+    return;
+  }
+
+
+  let totalItems = 0;
+  let totalWeight = 0;
+  let subtotal = 0;
+
+  let orderText =
+    "🛍️ অনলাইন শপিং শপ - নতুন অর্ডার%0A%0A";
+
+
+  orderText +=
+    "👤 কাস্টমারের নাম: " +
+    encodeURIComponent(name) +
+    "%0A";
+
+  orderText +=
+    "📱 মোবাইল: " +
+    encodeURIComponent(phone) +
+    "%0A";
+
+  orderText +=
+    "📍 ঠিকানা: " +
+    encodeURIComponent(address) +
+    "%0A%0A";
+
+
+  orderText +=
+    "🛒 অর্ডারের বিবরণ:%0A";
+
+
+  cart.forEach(item => {
+
+    const product = products[item.index];
+
+    const quantity = item.quantity;
+
+    const itemTotal =
+      product.price * quantity;
+
+    const itemWeight =
+      product.weight * quantity;
+
+    totalItems += quantity;
+
+    totalWeight += itemWeight;
+
+    subtotal += itemTotal;
+
+
+    orderText +=
+      "• " +
+      encodeURIComponent(product.name) +
+      " × " +
+      quantity +
+      " = ৳" +
+      itemTotal +
+      "%0A";
+
+  });
+
+
+  let deliveryCharge = 60;
+
+  if(totalWeight > 1){
+
+    deliveryCharge =
+      60 + Math.ceil(totalWeight - 1) * 20;
+
+  }
+
+
+  const grandTotal =
+    subtotal + deliveryCharge;
+
+
+  orderText += "%0A";
+
+  orderText +=
+    "মোট পণ্য: " +
+    totalItems +
+    " টি%0A";
+
+  orderText +=
+    "মোট ওজন: " +
+    totalWeight.toFixed(2) +
+    " কেজি%0A";
+
+  orderText +=
+    "পণ্যের মোট মূল্য: ৳" +
+    subtotal +
+    "%0A";
+
+  orderText +=
+    "ডেলিভারি চার্জ: ৳" +
+    deliveryCharge +
+    "%0A";
+
+  orderText +=
+    "💰 সর্বমোট: ৳" +
+    grandTotal;
+
+
+  /*
+     এখানে আপনার WhatsApp নম্বর বসাবেন।
+
+     উদাহরণ:
+     বাংলাদেশের নম্বর হলে 880 দিয়ে শুরু হবে।
+
+     যেমন:
+     01XXXXXXXXX
+     হবে:
+     8801XXXXXXXXX
+  */
+
+  const whatsappNumber =
+    "8801XXXXXXXXX";
+
+
+  const whatsappURL =
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    orderText;
+
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
+}
+
+
+/* =========================
+   প্রথমবার পণ্য দেখানো
+========================= */
+
+displayProducts();
+
+updateCart();
+
+</script>
+
+</body>
+</html>
