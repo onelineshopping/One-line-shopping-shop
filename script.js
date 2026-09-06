@@ -349,7 +349,7 @@
 
     <span class="close" onclick="closeCart()">×</span>
 
-    <h2>🛒 আপনার কার্ট</h2>
+    <h2>🛒 অর্ডার নাও কার্ট</h2>
 
     <div id="cartItems"></div>
 
