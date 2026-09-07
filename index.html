@@ -756,14 +756,14 @@ function confirmOrder(){
   });
 
 
-  let deliveryCharge = 60;
+  let deliveryCharge = 80;
 
-  if(totalWeight > 1){
+if(totalWeight > 1){
 
-    deliveryCharge =
-      60 + Math.ceil(totalWeight - 1) * 20;
+  deliveryCharge =
+    80 + Math.ceil(totalWeight - 1) * 30;
 
-  }
+}
 
 
   const grandTotal =
