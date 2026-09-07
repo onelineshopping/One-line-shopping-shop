@@ -574,17 +574,17 @@ function updateCart(){
   /*
      ডেলিভারি চার্জ
 
-     ১ কেজি পর্যন্ত = ৳60
+     ১ কেজি পর্যন্ত = ৳৮০
      ১ কেজির বেশি হলে
-     প্রতি অতিরিক্ত কেজিতে = ৳20
+     প্রতি অতিরিক্ত কেজিতে = ৳৩০
   */
 
-  let deliveryCharge = 60;
+  let deliveryCharge = 80;
 
   if(totalWeight > 1){
 
     deliveryCharge =
-      60 + Math.ceil(totalWeight - 1) * 20;
+      80 + Math.ceil(totalWeight - 1) * 30;
 
   }
 
