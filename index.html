@@ -104,6 +104,7 @@ button{
   background:#087f23;
   color:white;
   width:100%;
+  font-weight:bold;
 }
 
 .add-btn:hover{
@@ -197,7 +198,8 @@ button{
 }
 
 .order-form input,
-.order-form textarea{
+.order-form textarea,
+.order-form select{
   width:100%;
   padding:13px;
   margin-bottom:12px;
@@ -220,6 +222,23 @@ button{
   padding:14px;
 }
 
+.delivery-note{
+  background:#fff8e1;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:12px;
+  font-size:14px;
+}
+
+.success{
+  background:#e8f5e9;
+  border:1px solid #b7dfb9;
+  padding:15px;
+  border-radius:10px;
+  margin-top:15px;
+  text-align:center;
+}
+
 .empty{
   text-align:center;
   color:#777;
@@ -231,6 +250,16 @@ footer{
   padding:25px 10px;
   color:#777;
   font-size:14px;
+}
+
+@media(max-width:600px){
+  header h1{
+    font-size:23px;
+  }
+
+  .product img{
+    height:230px;
+  }
 }
 </style>
 </head>
@@ -256,10 +285,13 @@ footer{
   <div class="products" id="productsList"></div>
 
   <div class="cart-section">
-    <h2>🛒 আপনার কার্ট</h2>
+
+    <h2>🛒 আপনার অর্ডার নাও</h2>
 
     <div id="cartList">
-      <div class="empty">কার্টে এখনো কোনো পণ্য নেই।</div>
+      <div class="empty">
+        এখনো কোনো পণ্য নির্বাচন করা হয়নি।
+      </div>
     </div>
 
     <div class="summary">
@@ -271,7 +303,7 @@ footer{
 
       <p>
         <span>মোট ওজন:</span>
-        <span id="totalWeight">0 কেজি</span>
+        <span id="totalWeight">0.00 কেজি</span>
       </p>
 
       <p>
@@ -312,11 +344,61 @@ footer{
         placeholder="আপনার সম্পূর্ণ ডেলিভারি ঠিকানা লিখুন"
       ></textarea>
 
-      <button class="confirm-btn" onclick="confirmOrder()">
+      <input
+        type="text"
+        id="customerVillage"
+        placeholder="গ্রাম/এলাকা"
+      >
+
+      <input
+        type="text"
+        id="customerThana"
+        placeholder="থানা/উপজেলা"
+      >
+
+      <input
+        type="text"
+        id="customerDistrict"
+        placeholder="জেলা"
+      >
+
+      <input
+        type="text"
+        id="customerPost"
+        placeholder="পোস্ট অফিস"
+      >
+
+      <div class="delivery-note">
+        🚚 <strong>ডেলিভারি চার্জ:</strong><br>
+        ঢাকার ভিতরে — ৳80<br>
+        ঢাকার বাইরে — ৳180<br>
+        ১ কেজির বেশি হলে প্রতি অতিরিক্ত কেজিতে ৳30
+      </div>
+
+      <select
+        id="deliveryLocation"
+        onchange="updateCart()"
+      >
+        <option value="">ডেলিভারি এলাকা নির্বাচন করুন</option>
+        <option value="dhaka">ঢাকার ভিতরে — ৳80</option>
+        <option value="outside">ঢাকার বাইরে — ৳180</option>
+      </select>
+
+      <textarea
+        id="customerNote"
+        placeholder="কোনো বিশেষ নির্দেশনা থাকলে লিখুন"
+      ></textarea>
+
+      <button
+        class="confirm-btn"
+        onclick="confirmOrder()"
+      >
         📲 অর্ডার কনফার্ম করুন
       </button>
 
     </div>
+
+    <div id="successMessage"></div>
 
   </div>
 
@@ -363,13 +445,15 @@ let cart = [];
 
 function displayProducts(items = products){
 
-  const list = document.getElementById("productsList");
+  const list =
+    document.getElementById("productsList");
 
   list.innerHTML = "";
 
   items.forEach((product)=>{
 
-    const index = products.indexOf(product);
+    const index =
+      products.indexOf(product);
 
     list.innerHTML += `
 
@@ -394,7 +478,7 @@ function displayProducts(items = products){
           class="add-btn"
           onclick="addToCart(${index})"
         >
-          🛒 কার্টে যোগ করুন
+          🛍️ অর্ডার নাও
         </button>
 
       </div>
@@ -407,14 +491,13 @@ function displayProducts(items = products){
 
 
 /* =========================
-   কার্টে পণ্য যোগ
+   অর্ডার নাও
 ========================= */
 
 function addToCart(index){
 
-  const existing = cart.find(
-    item => item.index === index
-  );
+  const existing =
+    cart.find(item => item.index === index);
 
   if(existing){
 
@@ -440,9 +523,8 @@ function addToCart(index){
 
 function changeQuantity(index, amount){
 
-  const item = cart.find(
-    item => item.index === index
-  );
+  const item =
+    cart.find(item => item.index === index);
 
   if(!item) return;
 
@@ -450,9 +532,8 @@ function changeQuantity(index, amount){
 
   if(item.quantity <= 0){
 
-    cart = cart.filter(
-      item => item.index !== index
-    );
+    cart =
+      cart.filter(item => item.index !== index);
 
   }
 
@@ -474,14 +555,14 @@ function updateCart(){
 
     cartList.innerHTML =
       `<div class="empty">
-        কার্টে এখনো কোনো পণ্য নেই।
+        এখনো কোনো পণ্য নির্বাচন করা হয়নি।
        </div>`;
 
     document.getElementById("totalItems").innerText =
       "0 টি";
 
     document.getElementById("totalWeight").innerText =
-      "0 কেজি";
+      "0.00 কেজি";
 
     document.getElementById("subtotal").innerText =
       "0";
@@ -500,14 +581,17 @@ function updateCart(){
   let totalWeight = 0;
   let subtotal = 0;
 
+
   cartList.innerHTML = "";
 
 
   cart.forEach(item => {
 
-    const product = products[item.index];
+    const product =
+      products[item.index];
 
-    const quantity = item.quantity;
+    const quantity =
+      item.quantity;
 
     const itemTotal =
       product.price * quantity;
@@ -515,10 +599,9 @@ function updateCart(){
     const itemWeight =
       product.weight * quantity;
 
+
     totalItems += quantity;
-
     totalWeight += itemWeight;
-
     subtotal += itemTotal;
 
 
@@ -571,20 +654,40 @@ function updateCart(){
   });
 
 
-  /*
+  /* =========================
      ডেলিভারি চার্জ
+  ========================= */
 
-     ১ কেজি পর্যন্ত = ৳৮০
+  const location =
+    document.getElementById("deliveryLocation").value;
+
+
+  let deliveryCharge = 0;
+
+
+  if(location === "dhaka"){
+
+    deliveryCharge = 80;
+
+  }else if(location === "outside"){
+
+    deliveryCharge = 180;
+
+  }
+
+
+  /*
      ১ কেজির বেশি হলে
-     প্রতি অতিরিক্ত কেজিতে = ৳৩০
+     প্রতি অতিরিক্ত কেজিতে ৳30
   */
-
-  let deliveryCharge = 80;
 
   if(totalWeight > 1){
 
-    deliveryCharge =
-      80 + Math.ceil(totalWeight - 1) * 30;
+    const extraKg =
+      Math.ceil(totalWeight - 1);
+
+    deliveryCharge +=
+      extraKg * 30;
 
   }
 
@@ -612,14 +715,13 @@ function updateCart(){
 
 
 /* =========================
-   কার্ট থেকে পণ্য বাদ
+   পণ্য বাদ
 ========================= */
 
 function removeFromCart(index){
 
-  cart = cart.filter(
-    item => item.index !== index
-  );
+  cart =
+    cart.filter(item => item.index !== index);
 
   updateCart();
 
@@ -627,7 +729,7 @@ function removeFromCart(index){
 
 
 /* =========================
-   পণ্য সার্চ
+   সার্চ
 ========================= */
 
 function searchProducts(){
@@ -657,79 +759,121 @@ function confirmOrder(){
 
   if(cart.length === 0){
 
-    alert("দয়া করে প্রথমে কার্টে একটি পণ্য যোগ করুন।");
+    alert(
+      "দয়া করে প্রথমে একটি পণ্যের নিচে “অর্ডার নাও” চাপুন।"
+    );
 
     return;
   }
 
 
   const name =
-    document.getElementById("customerName").value.trim();
+    document.getElementById("customerName")
+    .value.trim();
 
   const phone =
-    document.getElementById("customerPhone").value.trim();
+    document.getElementById("customerPhone")
+    .value.trim();
 
   const address =
-    document.getElementById("customerAddress").value.trim();
+    document.getElementById("customerAddress")
+    .value.trim();
+
+  const village =
+    document.getElementById("customerVillage")
+    .value.trim();
+
+  const thana =
+    document.getElementById("customerThana")
+    .value.trim();
+
+  const district =
+    document.getElementById("customerDistrict")
+    .value.trim();
+
+  const post =
+    document.getElementById("customerPost")
+    .value.trim();
+
+  const location =
+    document.getElementById("deliveryLocation")
+    .value;
+
+  const note =
+    document.getElementById("customerNote")
+    .value.trim();
 
 
   if(name === ""){
 
     alert("দয়া করে আপনার নাম লিখুন।");
-
     return;
+
   }
 
 
   if(phone === ""){
 
     alert("দয়া করে আপনার মোবাইল নম্বর লিখুন।");
-
     return;
+
   }
 
 
   if(address === ""){
 
-    alert("দয়া করে আপনার ডেলিভারি ঠিকানা লিখুন।");
-
+    alert("দয়া করে আপনার সম্পূর্ণ ডেলিভারি ঠিকানা লিখুন।");
     return;
+
   }
 
+
+  if(thana === ""){
+
+    alert("দয়া করে থানা/উপজেলা লিখুন।");
+    return;
+
+  }
+
+
+  if(district === ""){
+
+    alert("দয়া করে জেলার নাম লিখুন।");
+    return;
+
+  }
+
+
+  if(location === ""){
+
+    alert(
+      "দয়া করে ডেলিভারি এলাকা নির্বাচন করুন।"
+    );
+
+    return;
+
+  }
+
+
+  /* =========================
+     মোট হিসাব
+  ========================= */
 
   let totalItems = 0;
   let totalWeight = 0;
   let subtotal = 0;
 
-  let orderText =
-    "🛍️ অনলাইন শপিং শপ - নতুন অর্ডার%0A%0A";
 
-
-  orderText +=
-    "👤 কাস্টমারের নাম: " +
-    encodeURIComponent(name) +
-    "%0A";
-
-  orderText +=
-    "📱 মোবাইল: " +
-    encodeURIComponent(phone) +
-    "%0A";
-
-  orderText +=
-    "📍 ঠিকানা: " +
-    encodeURIComponent(address) +
-    "%0A%0A";
-
-
-  orderText +=
-    "🛒 অর্ডারের বিবরণ:%0A";
+  let itemsText = "";
 
 
   cart.forEach(item => {
 
-    const product = products[item.index];
+    const product =
+      products[item.index];
 
-    const quantity = item.quantity;
+    const quantity =
+      item.quantity;
 
     const itemTotal =
       product.price * quantity;
@@ -737,77 +881,136 @@ function confirmOrder(){
     const itemWeight =
       product.weight * quantity;
 
+
     totalItems += quantity;
-
     totalWeight += itemWeight;
-
     subtotal += itemTotal;
 
 
-    orderText +=
+    itemsText +=
       "• " +
-      encodeURIComponent(product.name) +
+      product.name +
       " × " +
       quantity +
       " = ৳" +
       itemTotal +
-      "%0A";
+      "\n";
 
   });
 
 
-  let deliveryCharge = 80;
+  /* =========================
+     ডেলিভারি চার্জ
+  ========================= */
 
-if(totalWeight > 1){
+  let deliveryCharge = 0;
 
-  deliveryCharge =
-    80 + Math.ceil(totalWeight - 1) * 30;
 
-}
+  if(location === "dhaka"){
+
+    deliveryCharge = 80;
+
+  }else if(location === "outside"){
+
+    deliveryCharge = 180;
+
+  }
+
+
+  if(totalWeight > 1){
+
+    const extraKg =
+      Math.ceil(totalWeight - 1);
+
+    deliveryCharge +=
+      extraKg * 30;
+
+  }
 
 
   const grandTotal =
     subtotal + deliveryCharge;
 
 
-  orderText += "%0A";
+  /* =========================
+     Order ID
+  ========================= */
 
-  orderText +=
-    "মোট পণ্য: " +
-    totalItems +
-    " টি%0A";
+  const now =
+    new Date();
 
-  orderText +=
-    "মোট ওজন: " +
-    totalWeight.toFixed(2) +
-    " কেজি%0A";
-
-  orderText +=
-    "পণ্যের মোট মূল্য: ৳" +
-    subtotal +
-    "%0A";
-
-  orderText +=
-    "ডেলিভারি চার্জ: ৳" +
-    deliveryCharge +
-    "%0A";
-
-  orderText +=
-    "💰 সর্বমোট: ৳" +
-    grandTotal;
+  const date =
+    now.getFullYear().toString().slice(-2) +
+    String(now.getMonth()+1).padStart(2,"0") +
+    String(now.getDate()).padStart(2,"0");
 
 
-  /*
-     এখানে আপনার WhatsApp নম্বর বসাবেন।
+  const random =
+    Math.floor(1000 + Math.random() * 9000);
 
-     উদাহরণ:
-     বাংলাদেশের নম্বর হলে 880 দিয়ে শুরু হবে।
 
-     যেমন:
-     01XXXXXXXXX
-     হবে:
-     8801XXXXXXXXX
-  */
+  const orderId =
+    "OSS-" + date + "-" + random;
+
+
+  /* =========================
+     Delivery text
+  ========================= */
+
+  const deliveryText =
+    location === "dhaka"
+      ? "ঢাকার ভিতরে"
+      : "ঢাকার বাইরে";
+
+
+  /* =========================
+     WhatsApp message
+  ========================= */
+
+  const message =
+
+`🛍️ Online Shopping Shop
+
+✅ নতুন অর্ডার
+
+অর্ডার ID: ${orderId}
+
+👤 কাস্টমারের তথ্য:
+নাম: ${name}
+মোবাইল: ${phone}
+
+📍 ঠিকানা:
+${address}
+গ্রাম/এলাকা: ${village || "দেওয়া হয়নি"}
+থানা/উপজেলা: ${thana}
+জেলা: ${district}
+পোস্ট অফিস: ${post || "দেওয়া হয়নি"}
+
+🚚 ডেলিভারি:
+${deliveryText}
+
+🛒 অর্ডারের পণ্য:
+${itemsText}
+
+📦 মোট পণ্য: ${totalItems} পিস
+⚖️ মোট ওজন: ${totalWeight.toFixed(2)} কেজি
+
+💰 পণ্যের মূল্য: ৳${subtotal}
+🚚 ডেলিভারি চার্জ: ৳${deliveryCharge}
+
+💵 সর্বমোট: ৳${grandTotal}
+
+💳 পেমেন্ট: Cash on Delivery
+
+📝 নোট:
+${note || "কোনো নোট নেই"}
+
+ধন্যবাদ ❤️`;
+
+
+  /* =========================
+     WhatsApp number
+  ========================= */
 
   const whatsappNumber =
     "8801410153135";
@@ -817,13 +1020,55 @@ if(totalWeight > 1){
     "https://wa.me/" +
     whatsappNumber +
     "?text=" +
-    orderText;
+    encodeURIComponent(message);
 
+
+  /* =========================
+     Success message
+  ========================= */
+
+  document.getElementById("successMessage").innerHTML = `
+
+    <div class="success">
+
+      <h3>✅ অর্ডার সফলভাবে তৈরি হয়েছে!</h3>
+
+      <p style="margin-top:10px;">
+        আপনার অর্ডার ID:
+        <strong>${orderId}</strong>
+      </p>
+
+      <p style="margin-top:10px;">
+        সর্বমোট:
+        <strong>৳${grandTotal}</strong>
+      </p>
+
+      <p style="margin-top:10px;">
+        এখন WhatsApp-এ অর্ডারের বিস্তারিত পাঠানো হচ্ছে।
+      </p>
+
+    </div>
+
+  `;
+
+
+  /* =========================
+     WhatsApp খুলবে
+  ========================= */
 
   window.open(
     whatsappURL,
     "_blank"
   );
+
+
+  /* =========================
+     কার্ট পরিষ্কার
+  ========================= */
+
+  cart = [];
+
+  updateCart();
 
 }
 
