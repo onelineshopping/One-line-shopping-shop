@@ -13,229 +13,215 @@
 body{
   margin:0;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#f5f7f6;
+  background:#f4f7f5;
   color:#222;
 }
 
 header{
   background:#087f5b;
   color:white;
-  padding:15px 12px;
+  padding:16px;
   text-align:center;
+  font-size:24px;
+  font-weight:bold;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:10;
 }
 
-header h1{
-  margin:0;
-  font-size:24px;
+.search-box{
+  padding:12px;
+  background:white;
+  position:sticky;
+  top:61px;
+  z-index:9;
 }
 
-header p{
-  margin:5px 0 0;
-  font-size:14px;
-}
-
-.container{
-  max-width:700px;
-  margin:auto;
-  padding:15px;
-}
-
-.search{
+.search-box input{
   width:100%;
-  padding:13px;
+  padding:12px;
   border:1px solid #ccc;
   border-radius:8px;
-  margin-bottom:15px;
   font-size:16px;
+}
+
+.promo{
+  margin:15px;
+  padding:16px;
+  background:#e8f7ef;
+  border:1px solid #b8e0ca;
+  border-radius:12px;
+  text-align:center;
+}
+
+.promo h2{
+  margin:0 0 8px;
+  color:#087f5b;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  padding:15px;
+  max-width:1100px;
+  margin:auto;
 }
 
 .product{
   background:white;
   border-radius:12px;
-  padding:15px;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-  margin-bottom:18px;
+  padding:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.10);
+  text-align:center;
 }
 
 .product img{
   width:100%;
-  max-height:420px;
+  height:230px;
   object-fit:contain;
-  border-radius:10px;
-  background:#f5f5f5;
+  border-radius:8px;
+  background:#fafafa;
 }
 
-.product h2{
-  font-size:21px;
-  margin:12px 0 8px;
+.product h3{
+  margin:10px 0 5px;
+  font-size:18px;
+}
+
+.country{
+  font-size:15px;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.size{
+  color:#555;
+  margin-bottom:7px;
 }
 
 .old-price{
-  text-decoration:line-through;
   color:#888;
-  font-size:16px;
+  text-decoration:line-through;
+  font-size:14px;
 }
 
 .price{
   color:#087f5b;
-  font-size:25px;
+  font-size:22px;
   font-weight:bold;
-  margin:5px 0;
+  margin:4px 0;
 }
 
-.weight{
-  color:#666;
-  margin-bottom:10px;
+.discount{
+  color:#d35400;
+  font-weight:bold;
+  font-size:14px;
 }
 
 button{
   border:0;
-  border-radius:8px;
-  padding:12px 18px;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.order-btn{
-  width:100%;
   background:#087f5b;
   color:white;
+  padding:11px 16px;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+button:hover{
+  background:#056b4c;
+}
+
+.cart-button{
+  position:fixed;
+  right:15px;
+  bottom:15px;
+  background:#087f5b;
+  color:white;
+  padding:14px 18px;
+  border-radius:30px;
+  box-shadow:0 3px 12px rgba(0,0,0,.25);
+  z-index:20;
+  cursor:pointer;
   font-weight:bold;
 }
 
-.cart{
-  background:white;
-  border-radius:12px;
-  padding:18px;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:30;
+  overflow-y:auto;
+  padding:20px;
 }
 
-.cart h2{
-  margin-top:0;
-  color:#087f5b;
+.modal-content{
+  background:white;
+  max-width:600px;
+  margin:30px auto;
+  padding:20px;
+  border-radius:12px;
+}
+
+.close{
+  float:right;
+  font-size:28px;
+  cursor:pointer;
 }
 
 .cart-item{
   border-bottom:1px solid #ddd;
-  padding:10px 0;
+  padding:12px 0;
 }
 
-.qty{
+.qty-controls{
   display:flex;
   align-items:center;
+  justify-content:center;
   gap:10px;
   margin-top:8px;
 }
 
-.qty button{
-  background:#087f5b;
-  color:white;
-  width:38px;
-  height:38px;
-  padding:0;
-  font-size:20px;
+.qty-controls button{
+  padding:5px 11px;
+  margin:0;
 }
 
 .remove{
-  background:#dc3545 !important;
-  width:auto !important;
-  padding:8px 12px !important;
-  font-size:14px !important;
+  background:#c0392b;
 }
 
-.form-group{
-  margin-top:14px;
-}
-
-.form-group label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
+input,select,textarea{
   width:100%;
-  padding:12px;
+  padding:11px;
+  margin:6px 0 10px;
   border:1px solid #ccc;
-  border-radius:8px;
-  font-size:16px;
-  background:white;
-}
-
-.form-group textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-.delivery-box{
-  margin-top:15px;
-  padding:12px;
-  background:#f0f8f5;
-  border-radius:8px;
+  border-radius:7px;
+  font-size:15px;
 }
 
 .total-box{
-  margin-top:18px;
-  padding:15px;
-  background:#f7f7f7;
+  background:#f0f8f3;
+  padding:12px;
   border-radius:8px;
-  line-height:1.8;
-  font-size:16px;
-}
-
-.grand-total{
-  color:#087f5b;
-  font-size:23px;
-  font-weight:bold;
-}
-
-.confirm-btn{
-  width:100%;
-  margin-top:15px;
-  background:#087f5b;
-  color:white;
-  font-weight:bold;
-}
-
-.empty{
-  color:#777;
-  text-align:center;
-  padding:15px;
+  margin:12px 0;
 }
 
 .success{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:999;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.success-box{
-  background:white;
-  border-radius:12px;
-  padding:25px;
   text-align:center;
-  max-width:400px;
-  width:100%;
 }
 
-.success-box h2{
-  color:#087f5b;
+.hidden{
+  display:none;
 }
 
-.close-btn{
-  background:#087f5b;
-  color:white;
-  margin-top:10px;
+footer{
+  text-align:center;
+  padding:25px;
+  color:#666;
 }
 </style>
 </head>
@@ -243,697 +229,678 @@ button{
 <body>
 
 <header>
-  <h1>🛍️ অনলাইন শপিং শপ</h1>
-  <p>আপনার পছন্দের পণ্য সহজেই অর্ডার করুন</p>
+🛍️ অনলাইন শপিং শপ
 </header>
 
-<div class="container">
-
+<div class="search-box">
   <input
     type="text"
-    id="search"
-    class="search"
-    placeholder="🔎 পণ্য খুঁজুন..."
-    oninput="searchProduct()"
+    id="searchInput"
+    placeholder="পণ্য খুঁজুন..."
+    oninput="searchProducts()"
   >
+</div>
 
-  <div id="productList">
+<div class="promo">
+  <h2>🎉 বিশেষ অফার 🎉</h2>
+  <div>
+    DXN Ganozhi Plus Toothpaste-এর নির্বাচিত প্যাকে
+    <b>৳৫০ ছাড়</b>!
+  </div>
+  <div style="margin-top:6px;">
+    অল্প পরিমাণ ব্যবহারযোগ্য—সাধারণ ব্যবহারের তুলনায়
+    প্রায় ১/৩ পরিমাণ ব্যবহার করেও ব্যবহার করা যায়।
+  </div>
+</div>
 
-    <div class="product" data-name="লেডিস ফ্লোরাল ড্রেস সেট">
+<div class="products" id="products">
 
-      <img
-        src="IMG-20260807-WA0043.jpg"
-        alt="লেডিস ফ্লোরাল ড্রেস সেট"
-      >
+  <!-- পুরোনো ড্রেস -->
+  <div class="product" data-name="লেডিস ফ্লোরাল ড্রেস সেট">
+    <img src="IMG-20260807-WA0043.jpg" alt="লেডিস ফ্লোরাল ড্রেস সেট">
 
-      <h2>লেডিস ফ্লোরাল ড্রেস সেট</h2>
+    <h3>লেডিস ফ্লোরাল ড্রেস সেট</h3>
 
-      <div class="old-price">পুরাতন মূল্য: ৳1200</div>
+    <div class="size">ওজন: ০.৩০ কেজি</div>
 
-      <div class="price">অফার মূল্য: ৳850</div>
+    <div class="old-price">৳১২০০</div>
+    <div class="price">৳৮৫০</div>
 
-      <div class="weight">ওজন: 0.30 কেজি</div>
-
-      <button class="order-btn" onclick="addToCart()">
-        🛍️ অর্ডার নাও
-      </button>
-
-    </div>
-
+    <button onclick="addToCart('dress')">
+      🛒 অর্ডার নাও
+    </button>
   </div>
 
 
-  <div class="cart">
+  <!-- India 75g -->
+  <div class="product" data-name="DXN Ganozhi Plus Toothpaste India 75g">
 
-    <h2>🛒 আপনার অর্ডার</h2>
+    <img src="DXN-India-75g.jpg"
+         alt="DXN Ganozhi Plus Toothpaste India 75g">
 
-    <div id="cartItems">
-      <div class="empty">এখনও কোনো পণ্য অর্ডার করা হয়নি।</div>
-    </div>
+    <h3>DXN Ganozhi Plus Toothpaste</h3>
 
+    <div class="country">🇮🇳 ভারত (India)</div>
 
-    <div id="orderFormArea" style="display:none;">
+    <div class="size">৭৫ গ্রাম</div>
 
-      <h3>📦 অর্ডারের তথ্য</h3>
+    <div class="old-price">MRP ৳৫৬৫</div>
+    <div class="price">৳৫১৫</div>
 
-      <!-- ঠিকানা -->
-      <div class="form-group">
-        <label>🏠 ঠিকানা</label>
-        <textarea
-          id="address"
-          placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন"
-        ></textarea>
-      </div>
+    <div class="discount">৳৫০ ছাড়</div>
 
-      <!-- নাম -->
-      <div class="form-group">
-        <label>👤 নাম</label>
-        <input
-          type="text"
-          id="name"
-          placeholder="আপনার নাম লিখুন"
-        >
-      </div>
-
-      <!-- ফোন -->
-      <div class="form-group">
-        <label>📱 ফোন নাম্বার</label>
-        <input
-          type="tel"
-          id="phone"
-          placeholder="আপনার ফোন নাম্বার লিখুন"
-        >
-      </div>
-
-      <!-- গ্রাম -->
-      <div class="form-group">
-        <label>🏡 গ্রাম / মহল্লা</label>
-        <input
-          type="text"
-          id="village"
-          placeholder="গ্রাম / মহল্লার নাম"
-        >
-      </div>
-
-      <!-- থানা -->
-      <div class="form-group">
-        <label>🏢 থানা / উপজেলা</label>
-        <input
-          type="text"
-          id="thana"
-          placeholder="থানা / উপজেলার নাম"
-        >
-      </div>
-
-      <!-- জেলা -->
-      <div class="form-group">
-        <label>📍 জেলা</label>
-        <input
-          type="text"
-          id="district"
-          placeholder="জেলার নাম"
-        >
-      </div>
-
-      <!-- পোস্ট -->
-      <div class="form-group">
-        <label>📮 পোস্ট অফিস</label>
-        <input
-          type="text"
-          id="post"
-          placeholder="পোস্ট অফিসের নাম"
-        >
-      </div>
+    <button onclick="addToCart('india75')">
+      🛒 অর্ডার নাও
+    </button>
+  </div>
 
 
-      <!-- ডেলিভারি -->
-      <div class="delivery-box">
+  <!-- India 150g -->
+  <div class="product" data-name="DXN Ganozhi Plus Toothpaste India 150g">
 
-        <div class="form-group" style="margin-top:0;">
-          <label>🚚 ডেলিভারি এলাকা</label>
+    <img src="DXN-India-150g.jpg"
+         alt="DXN Ganozhi Plus Toothpaste India 150g">
 
-          <select id="deliveryLocation" onchange="updateCart()">
+    <h3>DXN Ganozhi Plus Toothpaste</h3>
 
-            <option value="">
-              ডেলিভারি এলাকা নির্বাচন করুন
-            </option>
+    <div class="country">🇮🇳 ভারত (India)</div>
 
-            <option value="dhaka">
-              ঢাকার ভিতরে — ৳80
-            </option>
+    <div class="size">১৫০ গ্রাম</div>
 
-            <option value="outside">
-              ঢাকার বাইরে — ৳180
-            </option>
+    <div class="old-price">MRP ৳৮৪০</div>
+    <div class="price">৳৭৯০</div>
 
-          </select>
+    <div class="discount">৳৫০ ছাড়</div>
 
-        </div>
-
-      </div>
+    <button onclick="addToCart('india150')">
+      🛒 অর্ডার নাও
+    </button>
+  </div>
 
 
-      <!-- মোট হিসাব -->
-      <div class="total-box">
+  <!-- Malaysia 75g -->
+  <div class="product" data-name="DXN Ganozhi Plus Toothpaste Malaysia 75g">
 
-        <div>
-          পণ্যের মূল্য:
-          <strong>৳<span id="productTotal">0</span></strong>
-        </div>
+    <img src="DXN-Malaysia-75g.jpg"
+         alt="DXN Ganozhi Plus Toothpaste Malaysia 75g">
 
-        <div>
-          মোট পিস:
-          <strong><span id="totalItems">0</span></strong>
-        </div>
+    <h3>DXN Ganozhi Plus Toothpaste</h3>
 
-        <div>
-          মোট ওজন:
-          <strong><span id="totalWeight">0.00</span> কেজি</strong>
-        </div>
+    <div class="country">🇲🇾 মালয়েশিয়া (Malaysia)</div>
 
-        <div>
-          ডেলিভারি চার্জ:
-          <strong>৳<span id="deliveryCharge">0</span></strong>
-        </div>
+    <div class="size">৭৫ গ্রাম</div>
 
-        <hr>
+    <div class="old-price">MRP ৳৬৪০</div>
+    <div class="price">৳৫৯০</div>
 
-        <div class="grand-total">
-          সর্বমোট:
-          ৳<span id="grandTotal">0</span>
-        </div>
+    <div class="discount">৳৫০ ছাড়</div>
 
-      </div>
+    <button onclick="addToCart('malaysia75')">
+      🛒 অর্ডার নাও
+    </button>
+  </div>
 
 
-      <button
-        class="confirm-btn"
-        onclick="confirmOrder()"
-      >
-        ✅ অর্ডার কনফার্ম করুন
-      </button>
+  <!-- Malaysia 150g -->
+  <div class="product" data-name="DXN Ganozhi Plus Toothpaste Malaysia 150g">
 
-    </div>
+    <img src="DXN-Malaysia-150g.jpg"
+         alt="DXN Ganozhi Plus Toothpaste Malaysia 150g">
 
+    <h3>DXN Ganozhi Plus Toothpaste</h3>
+
+    <div class="country">🇲🇾 মালয়েশিয়া (Malaysia)</div>
+
+    <div class="size">১৫০ গ্রাম</div>
+
+    <div class="old-price">MRP ৳১০০০</div>
+    <div class="price">৳৯৫০</div>
+
+    <div class="discount">৳৫০ ছাড়</div>
+
+    <button onclick="addToCart('malaysia150')">
+      🛒 অর্ডার নাও
+    </button>
   </div>
 
 </div>
 
 
-<!-- সফল অর্ডার -->
-<div class="success" id="successModal">
+<div class="cart-button" onclick="openCart()">
+  🛒 কার্ট (<span id="cartCount">0</span>)
+</div>
 
-  <div class="success-box">
 
-    <h2>✅ অর্ডার সফল হয়েছে!</h2>
+<!-- CART MODAL -->
+<div class="modal" id="cartModal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeCart()">×</span>
+
+    <h2>🛒 আপনার অর্ডার</h2>
+
+    <div id="cartItems"></div>
+
+    <div class="total-box">
+      <div>পণ্যের মূল্য: ৳<span id="subtotal">0</span></div>
+      <div>মোট ওজন: <span id="totalWeight">0</span> কেজি</div>
+      <div>ডেলিভারি চার্জ: ৳<span id="deliveryCharge">0</span></div>
+      <hr>
+      <b>সর্বমোট: ৳<span id="grandTotal">0</span></b>
+    </div>
+
+    <button onclick="showOrderForm()">
+      অর্ডার কনফার্ম করুন
+    </button>
+
+  </div>
+</div>
+
+
+<!-- ORDER FORM -->
+<div class="modal" id="orderModal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeOrderForm()">×</span>
+
+    <h2>📦 অর্ডার তথ্য</h2>
 
     <p>
-      আপনার অর্ডার নম্বর:
-      <strong id="successOrderId"></strong>
+      পণ্য হাতে পাওয়ার পর মূল্য পরিশোধ করুন।
+      <b>Cash on Delivery</b>
+    </p>
+
+    <form onsubmit="confirmOrder(event)">
+
+      <label>নাম</label>
+      <input id="name" required>
+
+      <label>যোগাযোগ নম্বর</label>
+      <input id="phone" type="tel" required>
+
+      <label>সম্পূর্ণ ঠিকানা</label>
+      <textarea id="address" required></textarea>
+
+      <label>গ্রাম / এলাকা</label>
+      <input id="village">
+
+      <label>থানা / উপজেলা</label>
+      <input id="thana">
+
+      <label>জেলা</label>
+      <input id="district" required>
+
+      <label>পোস্ট অফিস</label>
+      <input id="post">
+
+      <label>ডেলিভারি এলাকা</label>
+      <select id="deliveryArea" onchange="updateTotals()" required>
+        <option value="">নির্বাচন করুন</option>
+        <option value="dhaka">ঢাকার ভিতরে — ৳৮০</option>
+        <option value="outside">ঢাকার বাইরে — ৳১৮০</option>
+      </select>
+
+      <label>অতিরিক্ত নোট (ঐচ্ছিক)</label>
+      <textarea id="note"></textarea>
+
+      <div class="total-box">
+        <div>পণ্যের মূল্য: ৳<span id="formSubtotal">0</span></div>
+        <div>ডেলিভারি চার্জ: ৳<span id="formDelivery">0</span></div>
+        <hr>
+        <b>সর্বমোট: ৳<span id="formTotal">0</span></b>
+      </div>
+
+      <button type="submit">
+        ✅ অর্ডার নিশ্চিত করুন
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+
+<!-- SUCCESS -->
+<div class="modal" id="successModal">
+
+  <div class="modal-content success">
+
+    <h2>🎉 অর্ডার সফল!</h2>
+
+    <p>আপনার অর্ডারটি গ্রহণ করা হয়েছে।</p>
+
+    <p>
+      অর্ডার ID:
+      <b id="orderId"></b>
     </p>
 
     <p>
-      অর্ডারের তথ্য আমাদের WhatsApp-এ পাঠানো হবে।
+      অর্ডারের তথ্য WhatsApp-এর মাধ্যমে পাঠানো হয়েছে।
     </p>
 
-    <button
-      class="close-btn"
-      onclick="closeSuccess()"
-    >
+    <button onclick="closeSuccess()">
       ঠিক আছে
     </button>
 
   </div>
-
 </div>
+
+
+<footer>
+© 2026 অনলাইন শপিং শপ
+</footer>
 
 
 <script>
 
-let cart = [];
+const PRODUCTS = {
 
-const PRODUCT = {
-  name: "লেডিস ফ্লোরাল ড্রেস সেট",
-  price: 850,
-  weight: 0.30
+  dress:{
+    name:"লেডিস ফ্লোরাল ড্রেস সেট",
+    price:850,
+    weight:0.30
+  },
+
+  india75:{
+    name:"DXN Ganozhi Plus Toothpaste - India 75g",
+    price:515,
+    weight:0.075
+  },
+
+  india150:{
+    name:"DXN Ganozhi Plus Toothpaste - India 150g",
+    price:790,
+    weight:0.150
+  },
+
+  malaysia75:{
+    name:"DXN Ganozhi Plus Toothpaste - Malaysia 75g",
+    price:590,
+    weight:0.075
+  },
+
+  malaysia150:{
+    name:"DXN Ganozhi Plus Toothpaste - Malaysia 150g",
+    price:950,
+    weight:0.150
+  }
+
 };
 
-const WHATSAPP_NUMBER = "8801410153135";
+
+let cart = {};
 
 
-function addToCart(){
+function addToCart(id){
 
-  const existing = cart.find(
-    item => item.name === PRODUCT.name
-  );
-
-  if(existing){
-    existing.quantity++;
+  if(!cart[id]){
+    cart[id]=1;
   }else{
-    cart.push({
-      name: PRODUCT.name,
-      price: PRODUCT.price,
-      weight: PRODUCT.weight,
-      quantity: 1
-    });
+    cart[id]++;
   }
 
   updateCart();
 
-  document.getElementById("orderFormArea").style.display = "block";
-
-  document.getElementById("orderFormArea")
-    .scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
+  alert("পণ্যটি কার্টে যোগ হয়েছে।");
 }
 
 
-function increaseQuantity(){
+function changeQty(id,change){
 
-  if(cart.length > 0){
-    cart[0].quantity++;
-    updateCart();
+  if(!cart[id]) return;
+
+  cart[id]+=change;
+
+  if(cart[id]<=0){
+    delete cart[id];
   }
-
-}
-
-
-function decreaseQuantity(){
-
-  if(cart.length > 0){
-
-    cart[0].quantity--;
-
-    if(cart[0].quantity <= 0){
-      cart = [];
-      document.getElementById("orderFormArea").style.display = "none";
-    }
-
-    updateCart();
-  }
-
-}
-
-
-function removeItem(){
-
-  cart = [];
-
-  document.getElementById("orderFormArea").style.display = "none";
 
   updateCart();
+}
+
+
+function removeItem(id){
+
+  delete cart[id];
+
+  updateCart();
+}
+
+
+function getSubtotal(){
+
+  let total=0;
+
+  for(let id in cart){
+
+    total += PRODUCTS[id].price * cart[id];
+
+  }
+
+  return total;
+}
+
+
+function getTotalWeight(){
+
+  let weight=0;
+
+  for(let id in cart){
+
+    weight += PRODUCTS[id].weight * cart[id];
+
+  }
+
+  return weight;
+}
+
+
+function getDeliveryCharge(){
+
+  const area=document.getElementById("deliveryArea");
+
+  if(!area || !area.value){
+    return 0;
+  }
+
+  let charge =
+    area.value==="dhaka"
+    ? 80
+    : 180;
+
+  const weight=getTotalWeight();
+
+  if(weight>1){
+
+    charge += Math.ceil(weight-1)*30;
+
+  }
+
+  return charge;
 }
 
 
 function updateCart(){
 
-  const cartItems = document.getElementById("cartItems");
+  let count=0;
 
-  if(cart.length === 0){
-
-    cartItems.innerHTML =
-      '<div class="empty">এখনও কোনো পণ্য অর্ডার করা হয়নি।</div>';
-
-    document.getElementById("productTotal").innerText = "0";
-    document.getElementById("totalItems").innerText = "0";
-    document.getElementById("totalWeight").innerText = "0.00";
-    document.getElementById("deliveryCharge").innerText = "0";
-    document.getElementById("grandTotal").innerText = "0";
-
-    return;
+  for(let id in cart){
+    count += cart[id];
   }
 
+  document.getElementById("cartCount").innerText=count;
 
-  let totalItems = 0;
-  let totalWeight = 0;
-  let productTotal = 0;
+  let html="";
 
+  for(let id in cart){
 
-  cart.forEach(item => {
+    const p=PRODUCTS[id];
 
-    totalItems += item.quantity;
+    html += `
+      <div class="cart-item">
 
-    totalWeight +=
-      item.weight * item.quantity;
+        <b>${p.name}</b>
 
-    productTotal +=
-      item.price * item.quantity;
+        <div>
+          ৳${p.price} × ${cart[id]}
+        </div>
 
-  });
+        <div class="qty-controls">
 
+          <button onclick="changeQty('${id}',-1)">−</button>
 
-  cartItems.innerHTML = `
+          <b>${cart[id]}</b>
 
-    <div class="cart-item">
+          <button onclick="changeQty('${id}',1)">+</button>
 
-      <strong>${PRODUCT.name}</strong>
+          <button class="remove"
+                  onclick="removeItem('${id}')">
+            বাদ দিন
+          </button>
 
-      <div>
-        মূল্য: ৳${PRODUCT.price}
-      </div>
-
-      <div class="qty">
-
-        <button onclick="decreaseQuantity()">
-          −
-        </button>
-
-        <strong>
-          ${cart[0].quantity}
-        </strong>
-
-        <button onclick="increaseQuantity()">
-          +
-        </button>
-
-        <button
-          class="remove"
-          onclick="removeItem()"
-        >
-          বাদ দিন
-        </button>
+        </div>
 
       </div>
-
-    </div>
-
-  `;
-
-
-  const location =
-    document.getElementById("deliveryLocation").value;
-
-
-  let deliveryCharge = 0;
-
-
-  if(location === "dhaka"){
-
-    deliveryCharge = 80;
-
-  }else if(location === "outside"){
-
-    deliveryCharge = 180;
-
+    `;
   }
 
-
-  /*
-    ১ কেজির বেশি হলে প্রতি অতিরিক্ত
-    কেজি বা তার অংশের জন্য ৳30
-  */
-
-  if(totalWeight > 1){
-
-    const extraKg =
-      Math.ceil(totalWeight - 1);
-
-    deliveryCharge +=
-      extraKg * 30;
-
+  if(html===""){
+    html="<p>আপনার কার্ট এখন খালি।</p>";
   }
 
+  document.getElementById("cartItems").innerHTML=html;
 
-  const grandTotal =
-    productTotal + deliveryCharge;
-
-
-  document.getElementById("productTotal").innerText =
-    productTotal;
-
-  document.getElementById("totalItems").innerText =
-    totalItems;
-
-  document.getElementById("totalWeight").innerText =
-    totalWeight.toFixed(2);
-
-  document.getElementById("deliveryCharge").innerText =
-    deliveryCharge;
-
-  document.getElementById("grandTotal").innerText =
-    grandTotal;
-
+  updateTotals();
 }
 
 
-function confirmOrder(){
+function updateTotals(){
 
-  if(cart.length === 0){
+  const subtotal=getSubtotal();
 
-    alert("অনুগ্রহ করে আগে পণ্য অর্ডার নিন।");
+  const weight=getTotalWeight();
+
+  const delivery=getDeliveryCharge();
+
+  const total=subtotal+delivery;
+
+  document.getElementById("subtotal").innerText=subtotal;
+  document.getElementById("totalWeight").innerText=weight.toFixed(2);
+  document.getElementById("deliveryCharge").innerText=delivery;
+  document.getElementById("grandTotal").innerText=total;
+
+  document.getElementById("formSubtotal").innerText=subtotal;
+  document.getElementById("formDelivery").innerText=delivery;
+  document.getElementById("formTotal").innerText=total;
+}
+
+
+function openCart(){
+
+  document.getElementById("cartModal").style.display="block";
+
+  updateCart();
+}
+
+
+function closeCart(){
+
+  document.getElementById("cartModal").style.display="none";
+}
+
+
+function showOrderForm(){
+
+  if(Object.keys(cart).length===0){
+
+    alert("প্রথমে অন্তত একটি পণ্য নির্বাচন করুন।");
+    return;
+
+  }
+
+  closeCart();
+
+  document.getElementById("orderModal").style.display="block";
+
+  updateTotals();
+}
+
+
+function closeOrderForm(){
+
+  document.getElementById("orderModal").style.display="none";
+}
+
+
+function confirmOrder(event){
+
+  event.preventDefault();
+
+  if(Object.keys(cart).length===0){
+
+    alert("কার্ট খালি।");
+    return;
+
+  }
+
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  const address=document.getElementById("address").value.trim();
+  const village=document.getElementById("village").value.trim();
+  const thana=document.getElementById("thana").value.trim();
+  const district=document.getElementById("district").value.trim();
+  const post=document.getElementById("post").value.trim();
+  const area=document.getElementById("deliveryArea").value;
+  const note=document.getElementById("note").value.trim();
+
+  if(!area){
+
+    alert("ডেলিভারি এলাকা নির্বাচন করুন।");
     return;
 
   }
 
 
-  const name =
-    document.getElementById("name").value.trim();
-
-  const phone =
-    document.getElementById("phone").value.trim();
-
-  const address =
-    document.getElementById("address").value.trim();
-
-  const village =
-    document.getElementById("village").value.trim();
-
-  const thana =
-    document.getElementById("thana").value.trim();
-
-  const district =
-    document.getElementById("district").value.trim();
-
-  const post =
-    document.getElementById("post").value.trim();
-
-  const location =
-    document.getElementById("deliveryLocation").value;
-
-
-  if(!address){
-
-    alert("দয়া করে ঠিকানা লিখুন।");
-    return;
-
-  }
-
-  if(!name){
-
-    alert("দয়া করে নাম লিখুন।");
-    return;
-
-  }
-
-  if(!phone){
-
-    alert("দয়া করে ফোন নাম্বার লিখুন।");
-    return;
-
-  }
-
-  if(!village){
-
-    alert("দয়া করে গ্রাম / মহল্লা লিখুন।");
-    return;
-
-  }
-
-  if(!thana){
-
-    alert("দয়া করে থানা / উপজেলা লিখুন।");
-    return;
-
-  }
-
-  if(!district){
-
-    alert("দয়া করে জেলা লিখুন।");
-    return;
-
-  }
-
-  if(!post){
-
-    alert("দয়া করে পোস্ট অফিস লিখুন।");
-    return;
-
-  }
-
-  if(!location){
-
-    alert("দয়া করে ডেলিভারি এলাকা নির্বাচন করুন।");
-    return;
-
-  }
-
-
-  let totalItems = 0;
-  let totalWeight = 0;
-  let productTotal = 0;
-
-
-  cart.forEach(item => {
-
-    totalItems += item.quantity;
-
-    totalWeight +=
-      item.weight * item.quantity;
-
-    productTotal +=
-      item.price * item.quantity;
-
-  });
-
-
-  let deliveryCharge =
-    location === "dhaka"
-      ? 80
-      : 180;
-
-
-  if(totalWeight > 1){
-
-    const extraKg =
-      Math.ceil(totalWeight - 1);
-
-    deliveryCharge +=
-      extraKg * 30;
-
-  }
-
-
-  const grandTotal =
-    productTotal + deliveryCharge;
-
-
-  const now = new Date();
+  const now=new Date();
 
   const datePart =
-    now.getFullYear().toString() +
-    String(now.getMonth()+1).padStart(2,"0") +
+    now.getFullYear()+
+    String(now.getMonth()+1).padStart(2,"0")+
     String(now.getDate()).padStart(2,"0");
 
-
   const randomPart =
-    Math.floor(
-      1000 + Math.random() * 9000
-    );
-
+    Math.floor(1000+Math.random()*9000);
 
   const orderId =
-    "OSS-" + datePart + "-" + randomPart;
+    "OSS-"+datePart+"-"+randomPart;
 
 
-  const deliveryText =
-    location === "dhaka"
-      ? "ঢাকার ভিতরে"
-      : "ঢাকার বাইরে";
+  let productText="";
+
+  for(let id in cart){
+
+    const p=PRODUCTS[id];
+
+    productText +=
+      "\n• "+p.name+
+      " × "+cart[id]+
+      " = ৳"+(p.price*cart[id]);
+
+  }
+
+
+  const subtotal=getSubtotal();
+  const weight=getTotalWeight();
+  const delivery=getDeliveryCharge();
+  const total=subtotal+delivery;
+
+  const areaText =
+    area==="dhaka"
+    ? "ঢাকার ভিতরে"
+    : "ঢাকার বাইরে";
 
 
   const message =
 
-`🛍️ *নতুন অর্ডার — Online Shopping Shop*
+`🛍️ অনলাইন শপিং শপ - নতুন অর্ডার
 
-অর্ডার নম্বর: ${orderId}
-
-📦 পণ্য: ${PRODUCT.name}
-🔢 পরিমাণ: ${totalItems} পিস
-💰 পণ্যের মূল্য: ৳${productTotal}
-⚖️ মোট ওজন: ${totalWeight.toFixed(2)} কেজি
-
-🚚 ডেলিভারি এলাকা: ${deliveryText}
-💵 ডেলিভারি চার্জ: ৳${deliveryCharge}
-
-💰 *সর্বমোট: ৳${grandTotal}*
+অর্ডার ID: ${orderId}
 
 👤 নাম: ${name}
-📱 ফোন: ${phone}
+📞 ফোন: ${phone}
 
-🏠 ঠিকানা: ${address}
-🏡 গ্রাম / মহল্লা: ${village}
-🏢 থানা / উপজেলা: ${thana}
-📍 জেলা: ${district}
-📮 পোস্ট অফিস: ${post}
+📦 পণ্য:
+${productText}
 
-💳 পেমেন্ট: ক্যাশ অন ডেলিভারি
+💰 পণ্যের মূল্য: ৳${subtotal}
+⚖️ মোট ওজন: ${weight.toFixed(2)} কেজি
+🚚 ডেলিভারি: ${areaText}
+💵 ডেলিভারি চার্জ: ৳${delivery}
 
-ধন্যবাদ — Online Shopping Shop`;
+💰 সর্বমোট: ৳${total}
+
+🏠 সম্পূর্ণ ঠিকানা:
+${address}
+
+গ্রাম/এলাকা: ${village}
+থানা/উপজেলা: ${thana}
+জেলা: ${district}
+পোস্ট: ${post}
+
+📝 নোট:
+${note || "নেই"}
+
+💳 পেমেন্ট:
+Cash on Delivery`;
 
 
-  const whatsappUrl =
-    "https://wa.me/" +
-    WHATSAPP_NUMBER +
-    "?text=" +
+  const whatsappNumber="8801410153135";
+
+  const whatsappURL =
+    "https://wa.me/"+
+    whatsappNumber+
+    "?text="+
     encodeURIComponent(message);
 
 
-  document.getElementById("successOrderId").innerText =
-    orderId;
-
-  document.getElementById("successModal").style.display =
-    "flex";
+  window.open(whatsappURL,"_blank");
 
 
-  window.open(
-    whatsappUrl,
-    "_blank"
-  );
+  closeOrderForm();
+
+  document.getElementById("orderId").innerText=orderId;
+
+  document.getElementById("successModal").style.display="block";
 
 
-  cart = [];
+  cart={};
+
+  updateCart();
 
 }
 
 
 function closeSuccess(){
 
-  document.getElementById("successModal").style.display =
-    "none";
-
-  document.getElementById("orderFormArea").style.display =
-    "none";
-
-  document.getElementById("cartItems").innerHTML =
-    '<div class="empty">এখনও কোনো পণ্য অর্ডার করা হয়নি।</div>';
-
-  document.getElementById("productTotal").innerText = "0";
-  document.getElementById("totalItems").innerText = "0";
-  document.getElementById("totalWeight").innerText = "0.00";
-  document.getElementById("deliveryCharge").innerText = "0";
-  document.getElementById("grandTotal").innerText = "0";
+  document.getElementById("successModal").style.display="none";
 
 }
 
 
-function searchProduct(){
+function searchProducts(){
 
   const search =
-    document.getElementById("search")
-      .value
-      .toLowerCase()
-      .trim();
+    document.getElementById("searchInput")
+    .value
+    .toLowerCase()
+    .trim();
 
-  const product =
-    document.querySelector(".product");
+  const products =
+    document.querySelectorAll(".product");
 
-  const name =
-    product.dataset.name.toLowerCase();
+  products.forEach(product=>{
 
+    const name =
+      product.dataset.name.toLowerCase();
 
-  if(name.includes(search)){
+    if(name.includes(search)){
 
-    product.style.display = "block";
+      product.style.display="block";
 
-  }else{
+    }else{
 
-    product.style.display = "none";
+      product.style.display="none";
 
-  }
+    }
+
+  });
 
 }
+
+
+updateCart();
 
 </script>
 
