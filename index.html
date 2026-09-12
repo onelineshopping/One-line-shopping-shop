@@ -1,3 +1,6 @@
+অবশ্যই বন্ধু। ❤️ তোমার পাঠানো ১ নম্বর ফাইলের সম্পূর্ণ কোডটাই আমি ঠিক করে দিলাম। আগের কোডটা মুছে এই পুরো কোড একবারে বসাবে।
+আমি শুধু “অর্ডার নাও” বাটনের আচরণ পরিবর্তন করেছি—এখন চাপ দিলে সরাসরি অর্ডার ফর্ম খুলবে। কার্ট, quantity, delivery charge, WhatsApp—বাকি সব আগের মতো রাখা হয়েছে।
+Writing
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -266,7 +269,7 @@ footer{
     <div class="old-price">৳১২০০</div>
     <div class="price">৳৮৫০</div>
 
-    <button onclick="addToCart('dress')">
+    <button onclick="orderNow('dress')">
       🛒 অর্ডার নাও
     </button>
   </div>
@@ -289,7 +292,7 @@ footer{
 
     <div class="discount">৳৫০ ছাড়</div>
 
-    <button onclick="addToCart('india75')">
+    <button onclick="orderNow('india75')">
       🛒 অর্ডার নাও
     </button>
   </div>
@@ -312,7 +315,7 @@ footer{
 
     <div class="discount">৳৫০ ছাড়</div>
 
-    <button onclick="addToCart('india150')">
+    <button onclick="orderNow('india150')">
       🛒 অর্ডার নাও
     </button>
   </div>
@@ -335,7 +338,7 @@ footer{
 
     <div class="discount">৳৫০ ছাড়</div>
 
-    <button onclick="addToCart('malaysia75')">
+    <button onclick="orderNow('malaysia75')">
       🛒 অর্ডার নাও
     </button>
   </div>
@@ -358,7 +361,7 @@ footer{
 
     <div class="discount">৳৫০ ছাড়</div>
 
-    <button onclick="addToCart('malaysia150')">
+    <button onclick="orderNow('malaysia150')">
       🛒 অর্ডার নাও
     </button>
   </div>
@@ -485,6 +488,7 @@ footer{
     </button>
 
   </div>
+
 </div>
 
 
@@ -531,6 +535,18 @@ const PRODUCTS = {
 
 
 let cart = {};
+
+
+/* সরাসরি অর্ডার ফর্ম খোলার ফাংশন */
+function orderNow(id){
+
+  cart[id]=1;
+
+  updateCart();
+
+  showOrderForm();
+
+}
 
 
 function addToCart(id){
