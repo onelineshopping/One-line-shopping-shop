@@ -6,9 +6,7 @@
 <title>অনলাইন শপিং শপ</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
   margin:0;
@@ -228,385 +226,260 @@ footer{
 
 <body>
 
-<header>
-🛍️ অনলাইন শপিং শপ
-</header>
+<header>🛍️ অনলাইন শপিং শপ</header>
 
 <div class="search-box">
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="পণ্য খুঁজুন..."
-    oninput="searchProducts()"
-  >
+<input
+  type="text"
+  id="searchInput"
+  placeholder="পণ্য খুঁজুন..."
+  oninput="searchProducts()"
+>
 </div>
 
 <div class="promo">
-  <h2>🎉 বিশেষ অফার 🎉</h2>
-
-  <div>
-    DXN Ganozhi Plus Toothpaste-এর নির্বাচিত প্যাকে
-    <b>৳৫০ ছাড়</b>!
-  </div>
-
-  <div style="margin-top:6px;">
-    অল্প পরিমাণ ব্যবহারযোগ্য—সাধারণ ব্যবহারের তুলনায়
-    প্রায় ১/৩ পরিমাণ ব্যবহার করেও ব্যবহার করা যায়।
-  </div>
+<h2>🎉 বিশেষ অফার 🎉</h2>
+<div>DXN Ganozhi Plus Toothpaste-এর নির্বাচিত প্যাকে <b>৳৫০ ছাড়</b>!</div>
+<div style="margin-top:6px;">
+অল্প পরিমাণ ব্যবহারযোগ্য—সাধারণ ব্যবহারের তুলনায় প্রায় ১/৩ পরিমাণ ব্যবহার করেও ব্যবহার করা যায়।
+</div>
 </div>
 
 <div class="products" id="products">
 
-  <!-- পুরোনো ড্রেস -->
-  <div class="product" data-name="লেডিস ফ্লোরাল ড্রেস সেট">
+<div class="product" data-name="লেডিস ফ্লোরাল ড্রেস সেট">
+<img src="IMG-20260807-WA0043.jpg" alt="লেডিস ফ্লোরাল ড্রেস সেট">
+<h3>লেডিস ফ্লোরাল ড্রেস সেট</h3>
+<div class="size">ওজন: ০.৩০ কেজি</div>
+<div class="old-price">৳১২০০</div>
+<div class="price">৳৮৫০</div>
+<button onclick="addToCart('dress')">🛒 অর্ডার নাও</button>
+</div>
 
-    <img
-      src="IMG-20260807-WA0043.jpg"
-      alt="লেডিস ফ্লোরাল ড্রেস সেট"
-    >
+<div class="product" data-name="DXN Ganozhi Plus Toothpaste India 75g">
+<img src="DXN-India-75g.jpg" alt="DXN Ganozhi Plus Toothpaste India 75g">
+<h3>DXN Ganozhi Plus Toothpaste</h3>
+<div class="country">🇮🇳 ভারত (India)</div>
+<div class="size">৭৫ গ্রাম</div>
+<div class="old-price">MRP ৳৫৬৫</div>
+<div class="price">৳৫১৫</div>
+<div class="discount">৳৫০ ছাড়</div>
+<button onclick="addToCart('india75')">🛒 অর্ডার নাও</button>
+</div>
 
-    <h3>লেডিস ফ্লোরাল ড্রেস সেট</h3>
+<div class="product" data-name="DXN Ganozhi Plus Toothpaste India 150g">
+<img src="DXN-India-150g.jpg" alt="DXN Ganozhi Plus Toothpaste India 150g">
+<h3>DXN Ganozhi Plus Toothpaste</h3>
+<div class="country">🇮🇳 ভারত (India)</div>
+<div class="size">১৫০ গ্রাম</div>
+<div class="old-price">MRP ৳৮৪০</div>
+<div class="price">৳৭৯০</div>
+<div class="discount">৳৫০ ছাড়</div>
+<button onclick="addToCart('india150')">🛒 অর্ডার নাও</button>
+</div>
 
-    <div class="size">ওজন: ০.৩০ কেজি</div>
+<div class="product" data-name="DXN Ganozhi Plus Toothpaste Malaysia 75g">
+<img src="DXN-Malaysia-75g.jpg" alt="DXN Malaysia 75g">
+<h3>DXN Ganozhi Plus Toothpaste</h3>
+<div class="country">🇲🇾 মালয়েশিয়া (Malaysia)</div>
+<div class="size">৭৫ গ্রাম</div>
+<div class="old-price">MRP ৳৬৪০</div>
+<div class="price">৳৫৯০</div>
+<div class="discount">৳৫০ ছাড়</div>
+<button onclick="addToCart('malaysia75')">🛒 অর্ডার নাও</button>
+</div>
 
-    <div class="old-price">৳১২০০</div>
-    <div class="price">৳৮৫০</div>
-
-    <button onclick="addToCart('dress')">
-      🛒 অর্ডার নাও
-    </button>
-
-  </div>
-
-
-  <!-- India 75g -->
-  <div class="product"
-       data-name="DXN Ganozhi Plus Toothpaste India 75g">
-
-    <img
-      src="DXN-India-75g.jpg"
-      alt="DXN Ganozhi Plus Toothpaste India 75g"
-    >
-
-    <h3>DXN Ganozhi Plus Toothpaste</h3>
-
-    <div class="country">🇮🇳 ভারত (India)</div>
-
-    <div class="size">৭৫ গ্রাম</div>
-
-    <div class="old-price">MRP ৳৫৬৫</div>
-    <div class="price">৳৫১৫</div>
-
-    <div class="discount">৳৫০ ছাড়</div>
-
-    <button onclick="addToCart('india75')">
-      🛒 অর্ডার নাও
-    </button>
-
-  </div>
-
-
-  <!-- India 150g -->
-  <div class="product"
-       data-name="DXN Ganozhi Plus Toothpaste India 150g">
-
-    <img
-      src="DXN-India-150g.jpg"
-      alt="DXN Ganozhi Plus Toothpaste India 150g"
-    >
-
-    <h3>DXN Ganozhi Plus Toothpaste</h3>
-
-    <div class="country">🇮🇳 ভারত (India)</div>
-
-    <div class="size">১৫০ গ্রাম</div>
-
-    <div class="old-price">MRP ৳৮৪০</div>
-    <div class="price">৳৭৯০</div>
-
-    <div class="discount">৳৫০ ছাড়</div>
-
-    <button onclick="addToCart('india150')">
-      🛒 অর্ডার নাও
-    </button>
-
-  </div>
-
-
-  <!-- Malaysia 75g -->
-  <div class="product"
-       data-name="DXN Ganozhi Plus Toothpaste Malaysia 75g">
-
-    <img
-      src="DXN-Malaysia-75g.jpg"
-      alt="DXN Ganozhi Plus Toothpaste Malaysia 75g"
-    >
-
-    <h3>DXN Ganozhi Plus Toothpaste</h3>
-
-    <div class="country">🇲🇾 মালয়েশিয়া (Malaysia)</div>
-
-    <div class="size">৭৫ গ্রাম</div>
-
-    <div class="old-price">MRP ৳৬৪০</div>
-    <div class="price">৳৫৯০</div>
-
-    <div class="discount">৳৫০ ছাড়</div>
-
-    <button onclick="addToCart('malaysia75')">
-      🛒 অর্ডার নাও
-    </button>
-
-  </div>
-
-
-  <!-- Malaysia 150g -->
-  <div class="product"
-       data-name="DXN Ganozhi Plus Toothpaste Malaysia 150g">
-
-    <img
-      src="DXN-Malaysia-150g.jpg"
-      alt="DXN Ganozhi Plus Toothpaste Malaysia 150g"
-    >
-
-    <h3>DXN Ganozhi Plus Toothpaste</h3>
-
-    <div class="country">🇲🇾 মালয়েশিয়া (Malaysia)</div>
-
-    <div class="size">১৫০ গ্রাম</div>
-
-    <div class="old-price">MRP ৳১০০০</div>
-    <div class="price">৳৯৫০</div>
-
-    <div class="discount">৳৫০ ছাড়</div>
-
-    <button onclick="addToCart('malaysia150')">
-      🛒 অর্ডার নাও
-    </button>
-
-  </div>
+<div class="product" data-name="DXN Ganozhi Plus Toothpaste Malaysia 150g">
+<img src="DXN-Malaysia-150g.jpg" alt="DXN Malaysia 150g">
+<h3>DXN Ganozhi Plus Toothpaste</h3>
+<div class="country">🇲🇾 মালয়েশিয়া (Malaysia)</div>
+<div class="size">১৫০ গ্রাম</div>
+<div class="old-price">MRP ৳১০০০</div>
+<div class="price">৳৯৫০</div>
+<div class="discount">৳৫০ ছাড়</div>
+<button onclick="addToCart('malaysia150')">🛒 অর্ডার নাও</button>
+</div>
 
 </div>
 
-
-<!-- CART BUTTON -->
 <div class="cart-button" onclick="openCart()">
-  🛒 কার্ট (<span id="cartCount">0</span>)
+🛒 কার্ট (<span id="cartCount">0</span>)
 </div>
 
-
-<!-- CART MODAL -->
 <div class="modal" id="cartModal">
+<div class="modal-content">
 
-  <div class="modal-content">
+<span class="close" onclick="closeCart()">×</span>
 
-    <span class="close" onclick="closeCart()">×</span>
+<h2>🛒 আপনার অর্ডার</h2>
 
-    <h2>🛒 আপনার অর্ডার</h2>
+<div id="cartItems"></div>
 
-    <div id="cartItems"></div>
-
-    <div class="total-box">
-
-      <div>
-        পণ্যের মূল্য:
-        ৳<span id="subtotal">0</span>
-      </div>
-
-      <div>
-        মোট ওজন:
-        <span id="totalWeight">0</span> কেজি
-      </div>
-
-      <div>
-        ডেলিভারি চার্জ:
-        ৳<span id="deliveryCharge">0</span>
-      </div>
-
-      <hr>
-
-      <b>
-        সর্বমোট:
-        ৳<span id="grandTotal">0</span>
-      </b>
-
-    </div>
-
-    <button onclick="showOrderForm()">
-      অর্ডার কনফার্ম করুন
-    </button>
-
-  </div>
+<div class="total-box">
+<div>পণ্যের মূল্য: ৳<span id="subtotal">0</span></div>
+<div>মোট ওজন: <span id="totalWeight">0</span> কেজি</div>
+<div>ডেলিভারি চার্জ: ৳<span id="deliveryCharge">0</span></div>
+<hr>
+<b>সর্বমোট: ৳<span id="grandTotal">0</span></b>
 </div>
 
+<button onclick="showOrderForm()">অর্ডার কনফার্ম করুন</button>
 
-<!-- ORDER FORM -->
+</div>
+</div>
+
 <div class="modal" id="orderModal">
+<div class="modal-content">
 
-  <div class="modal-content">
+<span class="close" onclick="closeOrderForm()">×</span>
 
-    <span class="close" onclick="closeOrderForm()">×</span>
+<h2>📦 অর্ডার তথ্য</h2>
 
-    <h2>📦 অর্ডার তথ্য</h2>
+<p>
+পণ্য হাতে পাওয়ার পর মূল্য পরিশোধ করুন।
+<b>Cash on Delivery</b>
+</p>
 
-    <p>
-      পণ্য হাতে পাওয়ার পর মূল্য পরিশোধ করুন।
-      <b>Cash on Delivery</b>
-    </p>
+<form onsubmit="confirmOrder(event)">
 
-    <form onsubmit="confirmOrder(event)">
+<label>নাম</label>
+<input id="name" required>
 
-      <label>নাম</label>
-      <input id="name" required>
+<label>যোগাযোগ নম্বর</label>
+<input id="phone" type="tel" required>
 
-      <label>যোগাযোগ নম্বর</label>
-      <input id="phone" type="tel" required>
+<label>সম্পূর্ণ ঠিকানা</label>
+<textarea id="address" required></textarea>
 
-      <label>সম্পূর্ণ ঠিকানা</label>
-      <textarea id="address" required></textarea>
+<label>গ্রাম / এলাকা</label>
+<input id="village">
 
-      <label>গ্রাম / এলাকা</label>
-      <input id="village">
+<label>থানা / উপজেলা</label>
+<input id="thana">
 
-      <label>থানা / উপজেলা</label>
-      <input id="thana">
+<label>জেলা</label>
+<input id="district" required>
 
-      <label>জেলা</label>
-      <input id="district" required>
+<label>পোস্ট অফিস</label>
+<input id="post">
 
-      <label>পোস্ট অফিস</label>
-      <input id="post">
+<label>ডেলিভারি এলাকা</label>
 
-      <label>ডেলিভারি এলাকা</label>
+<select id="deliveryArea" onchange="updateTotals()" required>
 
-      <select
-        id="deliveryArea"
-        onchange="updateTotals()"
-        required
-      >
+<option value="">নির্বাচন করুন</option>
 
-        <option value="">নির্বাচন করুন</option>
+<option value="dhaka">
+ঢাকার ভিতরে — ৳৮০
+</option>
 
-        <option value="dhaka">
-          ঢাকার ভিতরে — ৳৮০
-        </option>
+<option value="outside">
+ঢাকার বাইরে — ৳১৮০
+</option>
 
-        <option value="outside">
-          ঢাকার বাইরে — ৳১৮০
-        </option>
+</select>
 
-      </select>
+<label>অতিরিক্ত নোট (ঐচ্ছিক)</label>
+<textarea id="note"></textarea>
 
-      <label>অতিরিক্ত নোট (ঐচ্ছিক)</label>
-      <textarea id="note"></textarea>
+<div class="total-box">
 
-
-      <div class="total-box">
-
-        <div>
-          পণ্যের মূল্য:
-          ৳<span id="formSubtotal">0</span>
-        </div>
-
-        <div>
-          ডেলিভারি চার্জ:
-          ৳<span id="formDelivery">0</span>
-        </div>
-
-        <hr>
-
-        <b>
-          সর্বমোট:
-          ৳<span id="formTotal">0</span>
-        </b>
-
-      </div>
-
-
-      <button type="submit">
-        ✅ অর্ডার নিশ্চিত করুন
-      </button>
-
-    </form>
-
-  </div>
+<div>
+পণ্যের মূল্য: ৳<span id="formSubtotal">0</span>
 </div>
 
+<div>
+ডেলিভারি চার্জ: ৳<span id="formDelivery">0</span>
+</div>
 
-<!-- SUCCESS -->
+<hr>
+
+<b>
+সর্বমোট: ৳<span id="formTotal">0</span>
+</b>
+
+</div>
+
+<button type="submit">
+✅ অর্ডার নিশ্চিত করুন
+</button>
+
+</form>
+
+</div>
+</div>
+
 <div class="modal" id="successModal">
 
-  <div class="modal-content success">
+<div class="modal-content success">
 
-    <h2>🎉 অর্ডার সফল!</h2>
+<h2>🎉 অর্ডার সফল!</h2>
 
-    <p>
-      আপনার অর্ডারটি গ্রহণ করা হয়েছে।
-    </p>
+<p>আপনার অর্ডারটি গ্রহণ করা হয়েছে।</p>
 
-    <p>
-      অর্ডার ID:
-      <b id="orderId"></b>
-    </p>
+<p>
+অর্ডার ID:
+<b id="orderId"></b>
+</p>
 
-    <p>
-      অর্ডারের তথ্য WhatsApp-এর মাধ্যমে পাঠানো হয়েছে।
-    </p>
+<p>
+অর্ডারের তথ্য WhatsApp-এর মাধ্যমে পাঠানো হয়েছে।
+</p>
 
-    <button onclick="closeSuccess()">
-      ঠিক আছে
-    </button>
+<button onclick="closeSuccess()">
+ঠিক আছে
+</button>
 
-  </div>
 </div>
-
+</div>
 
 <footer>
 © 2026 অনলাইন শপিং শপ
 </footer>
 
-
 <script>
 
 const PRODUCTS = {
 
-  dress:{
-    name:"লেডিস ফ্লোরাল ড্রেস সেট",
-    price:850,
-    weight:0.30
-  },
+dress:{
+name:"লেডিস ফ্লোরাল ড্রেস সেট",
+price:850,
+weight:0.30
+},
 
-  india75:{
-    name:"DXN Ganozhi Plus Toothpaste - India 75g",
-    price:515,
-    weight:0.075
-  },
+india75:{
+name:"DXN Ganozhi Plus Toothpaste - India 75g",
+price:515,
+weight:0.075
+},
 
-  india150:{
-    name:"DXN Ganozhi Plus Toothpaste - India 150g",
-    price:790,
-    weight:0.150
-  },
+india150:{
+name:"DXN Ganozhi Plus Toothpaste - India 150g",
+price:790,
+weight:0.150
+},
 
-  malaysia75:{
-    name:"DXN Ganozhi Plus Toothpaste - Malaysia 75g",
-    price:590,
-    weight:0.075
-  },
+malaysia75:{
+name:"DXN Ganozhi Plus Toothpaste - Malaysia 75g",
+price:590,
+weight:0.075
+},
 
-  malaysia150:{
-    name:"DXN Ganozhi Plus Toothpaste - Malaysia 150g",
-    price:950,
-    weight:0.150
-  }
+malaysia150:{
+name:"DXN Ganozhi Plus Toothpaste - Malaysia 150g",
+price:950,
+weight:0.150
+}
 
 };
-
 
 let cart = {};
 
 
-/* পুরোনো কার্ট সিস্টেম */
+/* =========================
+   কার্টে পণ্য যোগ
+   ========================= */
+
 function addToCart(id){
 
   if(!cart[id]){
@@ -617,9 +490,16 @@ function addToCart(id){
 
   updateCart();
 
-  alert("পণ্যটি কার্টে যোগ হয়েছে।");
+  /* আগের সিস্টেমের মতো পণ্য যোগ হওয়ার
+     পর সঙ্গে সঙ্গে কার্ট খুলবে */
+  openCart();
+
 }
 
+
+/* =========================
+   Quantity পরিবর্তন
+   ========================= */
 
 function changeQty(id,change){
 
@@ -632,16 +512,26 @@ function changeQty(id,change){
   }
 
   updateCart();
+
 }
 
+
+/* =========================
+   পণ্য বাদ দেওয়া
+   ========================= */
 
 function removeItem(id){
 
   delete cart[id];
 
   updateCart();
+
 }
 
+
+/* =========================
+   মোট পণ্যের মূল্য
+   ========================= */
 
 function getSubtotal(){
 
@@ -654,8 +544,13 @@ function getSubtotal(){
   }
 
   return total;
+
 }
 
+
+/* =========================
+   মোট ওজন
+   ========================= */
 
 function getTotalWeight(){
 
@@ -668,8 +563,13 @@ function getTotalWeight(){
   }
 
   return weight;
+
 }
 
+
+/* =========================
+   ডেলিভারি চার্জ
+   ========================= */
 
 function getDeliveryCharge(){
 
@@ -693,26 +593,36 @@ function getDeliveryCharge(){
   }
 
   return charge;
+
 }
 
+
+/* =========================
+   কার্ট আপডেট
+   ========================= */
 
 function updateCart(){
 
   let count=0;
 
   for(let id in cart){
+
     count += cart[id];
+
   }
 
   document.getElementById("cartCount").innerText=count;
 
+
   let html="";
+
 
   for(let id in cart){
 
     const p=PRODUCTS[id];
 
     html += `
+
       <div class="cart-item">
 
         <b>${p.name}</b>
@@ -723,28 +633,32 @@ function updateCart(){
 
         <div class="qty-controls">
 
-          <button onclick="changeQty('${id}',-1)">
+          <button
+            onclick="changeQty('${id}',-1)">
             −
           </button>
 
           <b>${cart[id]}</b>
 
-          <button onclick="changeQty('${id}',1)">
+          <button
+            onclick="changeQty('${id}',1)">
             +
           </button>
 
           <button
             class="remove"
-            onclick="removeItem('${id}')"
-          >
+            onclick="removeItem('${id}')">
             বাদ দিন
           </button>
 
         </div>
 
       </div>
+
     `;
+
   }
+
 
   if(html===""){
 
@@ -752,11 +666,17 @@ function updateCart(){
 
   }
 
+
   document.getElementById("cartItems").innerHTML=html;
 
   updateTotals();
+
 }
 
+
+/* =========================
+   মোট হিসাব আপডেট
+   ========================= */
 
 function updateTotals(){
 
@@ -789,22 +709,37 @@ function updateTotals(){
 
   document.getElementById("formTotal").innerText=
     total;
+
 }
 
+
+/* =========================
+   কার্ট খোলা
+   ========================= */
 
 function openCart(){
 
   document.getElementById("cartModal").style.display="block";
 
   updateCart();
+
 }
 
+
+/* =========================
+   কার্ট বন্ধ
+   ========================= */
 
 function closeCart(){
 
   document.getElementById("cartModal").style.display="none";
+
 }
 
+
+/* =========================
+   অর্ডার ফর্ম
+   ========================= */
 
 function showOrderForm(){
 
@@ -813,6 +748,7 @@ function showOrderForm(){
     alert("প্রথমে অন্তত একটি পণ্য নির্বাচন করুন।");
 
     return;
+
   }
 
   closeCart();
@@ -820,14 +756,20 @@ function showOrderForm(){
   document.getElementById("orderModal").style.display="block";
 
   updateTotals();
+
 }
 
 
 function closeOrderForm(){
 
   document.getElementById("orderModal").style.display="none";
+
 }
 
+
+/* =========================
+   অর্ডার নিশ্চিত
+   ========================= */
 
 function confirmOrder(event){
 
@@ -839,6 +781,7 @@ function confirmOrder(event){
     alert("কার্ট খালি।");
 
     return;
+
   }
 
 
@@ -875,23 +818,23 @@ function confirmOrder(event){
     alert("ডেলিভারি এলাকা নির্বাচন করুন।");
 
     return;
+
   }
 
 
   const now=new Date();
 
-
-  const datePart =
+  const datePart=
     now.getFullYear()+
     String(now.getMonth()+1).padStart(2,"0")+
     String(now.getDate()).padStart(2,"0");
 
 
-  const randomPart =
+  const randomPart=
     Math.floor(1000+Math.random()*9000);
 
 
-  const orderId =
+  const orderId=
     "OSS-"+datePart+"-"+randomPart;
 
 
@@ -903,9 +846,12 @@ function confirmOrder(event){
     const p=PRODUCTS[id];
 
     productText +=
-      "\n• "+p.name+
-      " × "+cart[id]+
-      " = ৳"+(p.price*cart[id]);
+      "\n• "+
+      p.name+
+      " × "+
+      cart[id]+
+      " = ৳"+
+      (p.price*cart[id]);
 
   }
 
@@ -919,14 +865,13 @@ function confirmOrder(event){
   const total=subtotal+delivery;
 
 
-  const areaText =
+  const areaText=
     area==="dhaka"
     ? "ঢাকার ভিতরে"
     : "ঢাকার বাইরে";
 
 
   const message =
-
 `🛍️ অনলাইন শপিং শপ - নতুন অর্ডার
 
 অর্ডার ID: ${orderId}
@@ -961,15 +906,17 @@ Cash on Delivery`;
 
   const whatsappNumber="8801410153135";
 
-
-  const whatsappURL =
+  const whatsappURL=
     "https://wa.me/"+
     whatsappNumber+
     "?text="+
     encodeURIComponent(message);
 
 
-  window.open(whatsappURL,"_blank");
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
 
 
   closeOrderForm();
@@ -990,30 +937,40 @@ Cash on Delivery`;
 }
 
 
+/* =========================
+   Success বন্ধ
+   ========================= */
+
 function closeSuccess(){
 
   document.getElementById("successModal").style.display=
     "none";
+
 }
 
 
+/* =========================
+   পণ্য Search
+   ========================= */
+
 function searchProducts(){
 
-  const search =
+  const search=
     document.getElementById("searchInput")
     .value
     .toLowerCase()
     .trim();
 
 
-  const products =
+  const products=
     document.querySelectorAll(".product");
 
 
   products.forEach(product=>{
 
-    const name =
-      product.dataset.name.toLowerCase();
+    const name=
+      product.dataset.name
+      .toLowerCase();
 
 
     if(name.includes(search)){
@@ -1030,6 +987,10 @@ function searchProducts(){
 
 }
 
+
+/* =========================
+   শুরুতে কার্ট আপডেট
+   ========================= */
 
 updateCart();
 
