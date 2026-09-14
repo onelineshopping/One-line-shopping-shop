@@ -1,76 +1,894 @@
 <!DOCTYPE html>
-<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>অনলাইন শপিং শপ</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f4f7f5;color:#222}
-header{background:#087f5b;color:white;text-align:center;padding:18px}header h1{margin:0;font-size:27px}
-.search{position:sticky;top:0;z-index:20;background:white;padding:10px;box-shadow:0 2px 8px #0001}.search input{width:100%;padding:12px;border:1px solid #ddd;border-radius:25px;font-size:16px}
-.promo{margin:14px;padding:14px;background:#e9fff3;border:1px solid #b8e8cd;border-radius:14px;text-align:center;color:#087f5b;font-weight:bold}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;padding:14px}.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px #0001}.card img{width:100%;height:230px;object-fit:contain;padding:10px}.body{padding:14px}.body h2{font-size:19px;color:#075d45}.old{text-decoration:line-through;color:#888}.price{font-size:23px;font-weight:bold;color:#e53935}.discount{display:inline-block;background:#eaffef;color:#087f5b;padding:4px 8px;border-radius:15px;font-size:12px;margin:6px 0}
-button{border:0;border-radius:10px;padding:11px 15px;font-weight:bold;cursor:pointer}.order{width:100%;background:#087f5b;color:white}.float{position:fixed;right:16px;bottom:18px;z-index:30;background:#e53935;color:white;border-radius:30px}.float span{background:white;color:#e53935;border-radius:50%;padding:2px 7px}
-.modal{display:none;position:fixed;inset:0;background:#0008;z-index:50;align-items:center;justify-content:center;padding:15px}.box{background:white;width:min(520px,100%);max-height:92vh;overflow:auto;border-radius:18px;padding:20px}.box h2{color:#087f5b}.close{float:right;background:#eee}.field{margin:10px 0}.field label{display:block;font-weight:bold;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid #ccc;border-radius:9px;font-size:15px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.confirm{width:100%;background:#087f5b;color:white;margin-top:10px}.cartitem{border-bottom:1px solid #eee;padding:10px 0}.qty button{padding:4px 9px;background:#eee}.remove{background:#ffe9e9;color:#d00}.total{font-size:18px;font-weight:bold;margin-top:12px}
-@media(max-width:600px){.products{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
-</style></head><body>
-<header><h1>🛒 অনলাইন শপিং শপ</h1><p>আপনার অনলাইন শপিংয়ের বিশ্বস্ত ঠিকানা</p></header>
-<div class="search"><input id="search" placeholder="🔎 পণ্য খুঁজুন..." oninput="render(this.value)"></div>
-<div class="promo">🎉 DXN Ganozhi Toothpaste — প্রতিটি প্যাকে ৳৫০ ছাড়! &nbsp; | &nbsp; 💡 Power Bank & Light — ৳৫০০ থেকে ৳৩৫০</div>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#f4f7f5;
+  color:#222
+}
+header{
+  background:#087f5b;
+  color:white;
+  text-align:center;
+  padding:18px
+}
+header h1{margin:0;font-size:27px}
+
+.search{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:white;
+  padding:10px;
+  box-shadow:0 2px 8px #0001
+}
+.search input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:25px;
+  font-size:16px
+}
+
+.promo{
+  margin:14px;
+  padding:14px;
+  background:#e9fff3;
+  border:1px solid #b8e8cd;
+  border-radius:14px;
+  text-align:center;
+  color:#087f5b;
+  font-weight:bold
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+  padding:14px
+}
+.card{
+  background:white;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 3px 12px #0001
+}
+.card img{
+  width:100%;
+  height:230px;
+  object-fit:contain;
+  padding:10px
+}
+.body{padding:14px}
+.body h2{
+  font-size:19px;
+  color:#075d45
+}
+.old{
+  text-decoration:line-through;
+  color:#888
+}
+.price{
+  font-size:23px;
+  font-weight:bold;
+  color:#e53935
+}
+.discount{
+  display:inline-block;
+  background:#eaffef;
+  color:#087f5b;
+  padding:4px 8px;
+  border-radius:15px;
+  font-size:12px;
+  margin:6px 0
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
+  font-weight:bold;
+  cursor:pointer
+}
+.order{
+  width:100%;
+  background:#087f5b;
+  color:white
+}
+.float{
+  position:fixed;
+  right:16px;
+  bottom:18px;
+  z-index:30;
+  background:#e53935;
+  color:white;
+  border-radius:30px
+}
+.float span{
+  background:white;
+  color:#e53935;
+  border-radius:50%;
+  padding:2px 7px
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:50;
+  align-items:center;
+  justify-content:center;
+  padding:15px
+}
+.box{
+  background:white;
+  width:min(520px,100%);
+  max-height:92vh;
+  overflow:auto;
+  border-radius:18px;
+  padding:20px
+}
+.box h2{color:#087f5b}
+.close{
+  float:right;
+  background:#eee
+}
+.field{margin:10px 0}
+.field label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:5px
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:11px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  font-size:15px
+}
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+.confirm{
+  width:100%;
+  background:#087f5b;
+  color:white;
+  margin-top:10px
+}
+.cartitem{
+  border-bottom:1px solid #eee;
+  padding:10px 0
+}
+.qty button{
+  padding:4px 9px;
+  background:#eee
+}
+.remove{
+  background:#ffe9e9;
+  color:#d00
+}
+.total{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:12px
+}
+
+@media(max-width:600px){
+  .products{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🛒 অনলাইন শপিং শপ</h1>
+  <p>আপনার অনলাইন শপিংয়ের বিশ্বস্ত ঠিকানা</p>
+</header>
+
+<div class="search">
+  <input id="search" placeholder="🔎 পণ্য খুঁজুন..." oninput="render(this.value)">
+</div>
+
+<div class="promo">
+  🎉 DXN Ganozhi Toothpaste — প্রতিটি প্যাকে ৳৫০ ছাড়!
+  &nbsp; | &nbsp;
+  💡 Power Bank & Light — ৳৫০০ থেকে ৳৩৫০
+</div>
+
 <section class="products" id="products"></section>
-<button class="float" onclick="openCart()">🛒 কার্ট <span id="count">0</span></button>
 
-<div class="modal" id="option"><div class="box"><button class="close" onclick="closeM('option')">✕</button><h2>👗 রঙ ও সাইজ নির্বাচন</h2>
-<div class="field"><label>রঙ *</label><select id="color"><option value="">রঙ নির্বাচন করুন</option><option>লাল</option><option>নীল</option><option>কালো</option><option>সবুজ</option><option>হলুদ</option><option>অন্যান্য</option></select></div>
-<div class="field"><label>সাইজ *</label><select id="size"><option value="">সাইজ নির্বাচন করুন</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
-<button class="confirm" onclick="dressAdd()">কার্টে যোগ করুন</button></div></div>
+<button class="float" onclick="openCart()">
+  🛒 কার্ট <span id="count">0</span>
+</button>
 
-<div class="modal" id="cart"><div class="box"><button class="close" onclick="closeM('cart')">✕</button><h2>🛒 আপনার কার্ট</h2><div id="items"></div><div class="total" id="cartTotal"></div><button class="confirm" onclick="orderOpen()">অর্ডার কনফার্ম করুন</button></div></div>
+<!-- Dress Options -->
+<div class="modal" id="option">
+  <div class="box">
+    <button class="close" onclick="closeM('option')">✕</button>
+    <h2>👗 রঙ ও সাইজ নির্বাচন</h2>
 
-<div class="modal" id="order"><div class="box"><button class="close" onclick="closeM('order')">✕</button><h2>📦 অর্ডার তথ্য</h2>
-<div class="field"><label>নাম *</label><input id="name"></div><div class="field"><label>যোগাযোগ নম্বর *</label><input id="phone"></div>
-<div class="field"><label>সম্পূর্ণ ঠিকানা *</label><textarea id="address" rows="3"></textarea></div>
-<div class="row"><div class="field"><label>গ্রাম/এলাকা</label><input id="village"></div><div class="field"><label>থানা/উপজেলা</label><input id="thana"></div></div>
-<div class="row"><div class="field"><label>জেলা</label><input id="district"></div><div class="field"><label>পোস্ট</label><input id="post"></div></div>
-<div class="field"><label>ডেলিভারি এলাকা *</label><select id="delivery" onchange="orderTotal()"><option value="dhaka">ঢাকার ভিতরে — ৳৮০</option><option value="outside">ঢাকার বাইরে — ৳১৮০</option></select></div>
-<div class="field"><label>অতিরিক্ত নোট</label><textarea id="note" rows="2"></textarea></div><div class="total" id="ototal"></div>
-<button class="confirm" onclick="submitOrder()">অর্ডার কনফার্ম করুন</button></div></div>
+    <div class="field">
+      <label>রঙ *</label>
+      <select id="color">
+        <option value="">রঙ নির্বাচন করুন</option>
+        <option>লাল</option>
+        <option>নীল</option>
+        <option>কালো</option>
+        <option>সবুজ</option>
+        <option>হলুদ</option>
+        <option>অন্যান্য</option>
+      </select>
+    </div>
 
-<div class="modal" id="success"><div class="box" style="text-align:center"><h2>✅ অর্ডার সফল হয়েছে!</h2><p id="successText"></p><button class="confirm" id="wa">📱 WhatsApp-এ অর্ডার পাঠান</button></div></div>
+    <div class="field">
+      <label>সাইজ *</label>
+      <select id="size">
+        <option value="">সাইজ নির্বাচন করুন</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+        <option>XXL</option>
+      </select>
+    </div>
+
+    <button class="confirm" onclick="dressAdd()">
+      অর্ডার নাও
+    </button>
+  </div>
+</div>
+
+<!-- Cart -->
+<div class="modal" id="cart">
+  <div class="box">
+    <button class="close" onclick="closeM('cart')">✕</button>
+    <h2>🛒 আপনার কার্ট</h2>
+
+    <div id="items"></div>
+
+    <div class="total" id="cartTotal"></div>
+
+    <button class="confirm" onclick="orderOpen()">
+      অর্ডার কনফার্ম করুন
+    </button>
+  </div>
+</div>
+
+<!-- Order Form -->
+<div class="modal" id="order">
+  <div class="box">
+    <button class="close" onclick="closeM('order')">✕</button>
+
+    <h2>📦 অর্ডার তথ্য</h2>
+
+    <div class="field">
+      <label>নাম *</label>
+      <input id="name">
+    </div>
+
+    <div class="field">
+      <label>যোগাযোগ নম্বর *</label>
+      <input id="phone">
+    </div>
+
+    <div class="field">
+      <label>সম্পূর্ণ ঠিকানা *</label>
+      <textarea id="address" rows="3"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>গ্রাম/এলাকা</label>
+        <input id="village">
+      </div>
+
+      <div class="field">
+        <label>থানা/উপজেলা</label>
+        <input id="thana">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>জেলা</label>
+        <input id="district">
+      </div>
+
+      <div class="field">
+        <label>পোস্ট</label>
+        <input id="post">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>ডেলিভারি এলাকা *</label>
+
+      <select id="delivery" onchange="orderTotal()">
+        <option value="dhaka">
+          ঢাকার ভিতরে — ৳৮০
+        </option>
+
+        <option value="outside">
+          ঢাকার বাইরে — ৳১৮০
+        </option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>অতিরিক্ত নোট</label>
+      <textarea id="note" rows="2"></textarea>
+    </div>
+
+    <div class="total" id="ototal"></div>
+
+    <button class="confirm" onclick="submitOrder()">
+      অর্ডার কনফার্ম করুন
+    </button>
+  </div>
+</div>
+
+<!-- Success -->
+<div class="modal" id="success">
+  <div class="box" style="text-align:center">
+
+    <h2>✅ অর্ডার সফল হয়েছে!</h2>
+
+    <p id="successText"></p>
+
+    <button class="confirm" id="wa">
+      📱 WhatsApp-এ অর্ডার পাঠান
+    </button>
+
+  </div>
+</div>
 
 <script>
+
 const P={
-dress:{name:"লেডিস ফ্লোরাল ড্রেস সেট",old:1200,price:850,weight:.30,image:"IMG-20260807-WA0043.jpg",type:"dress"},
-india75:{name:"DXN Ganozhi Plus Toothpaste",country:"🇮🇳 ভারতীয়",size:"৭৫ গ্রাম",old:565,price:515,weight:.075,image:"DXN-India-75g.jpg",type:"paste"},
-india150:{name:"DXN Ganozhi Plus Toothpaste",country:"🇮🇳 ভারতীয়",size:"১৫০ গ্রাম",old:840,price:790,weight:.15,image:"DXN-India-150g.jpg",type:"paste"},
-malaysia75:{name:"DXN Ganozhi Toothpaste",country:"🇲🇾 মালয়েশিয়ান",size:"৭৫ গ্রাম",old:640,price:590,weight:.075,image:"DXN-Malaysia-75g.jpg",type:"paste"},
-malaysia150:{name:"DXN Ganozhi Toothpaste",country:"🇲🇾 মালয়েশিয়ান",size:"১৫০ গ্রাম",old:1000,price:950,weight:.15,image:"DXN-Malaysia-150g.jpg",type:"paste"},
-powerlight:{name:"Power Bank & Light",old:500,price:350,weight:.30,image:"power-bank-light.png",type:"light"}
+
+dress:{
+  name:"লেডিস ফ্লোরাল ড্রেস সেট",
+  old:1200,
+  price:850,
+  weight:.30,
+  image:"IMG-20260807-WA0043.jpg",
+  type:"dress"
+},
+
+india75:{
+  name:"DXN Ganozhi Plus Toothpaste",
+  country:"🇮🇳 ভারতীয়",
+  size:"৭৫ গ্রাম",
+  old:565,
+  price:515,
+  weight:.075,
+  image:"DXN-India-75g.jpg",
+  type:"paste"
+},
+
+india150:{
+  name:"DXN Ganozhi Plus Toothpaste",
+  country:"🇮🇳 ভারতীয়",
+  size:"১৫০ গ্রাম",
+  old:840,
+  price:790,
+  weight:.15,
+  image:"DXN-India-150g.jpg",
+  type:"paste"
+},
+
+malaysia75:{
+  name:"DXN Ganozhi Toothpaste",
+  country:"🇲🇾 মালয়েশিয়ান",
+  size:"৭৫ গ্রাম",
+  old:640,
+  price:590,
+  weight:.075,
+  image:"DXN-Malaysia-75g.jpg",
+  type:"paste"
+},
+
+malaysia150:{
+  name:"DXN Ganozhi Toothpaste",
+  country:"🇲🇾 মালয়েশিয়ান",
+  size:"১৫০ গ্রাম",
+  old:1000,
+  price:950,
+  weight:.15,
+  image:"DXN-Malaysia-150g.jpg",
+  type:"paste"
+},
+
+powerlight:{
+  name:"Power Bank & Light",
+  old:500,
+  price:350,
+  weight:.30,
+  image:"power-bank-light.png",
+  type:"light"
+}
+
 };
-let cart={},chosen="";
 
-function render(q=""){q=q.toLowerCase();let h="";for(let id in P){let p=P[id],t=(p.name+" "+(p.country||"")+" "+(p.size||"")).toLowerCase();if(q&&!t.includes(q))continue;
-let v=p.type==="dress"?"🎨 রঙ + 📏 সাইজ নির্বাচন করুন":p.type==="paste"?p.country+" • "+p.size:"💡 ১০W LED • মোবাইল চার্জিং • প্রায় ৩–৪ ঘণ্টা আলো";
-h+=`<div class="card"><img src="${p.image}" alt="${p.name}"><div class="body"><h2>${p.type==="paste"?p.country+" ":""}${p.name}</h2><div>${v}</div><p><span class="old">৳${p.old}</span> <span class="price">৳${p.price}</span></p><span class="discount">${p.type==="light"?"৩০% ছাড়":"৳৫০ ছাড়"}</span><button class="order" onclick="addStart('${id}')">অর্ডার নাও</button></div></div>`}document.getElementById("products").innerHTML=h}
-function addStart(id){chosen=id;if(P[id].type==="dress")document.getElementById("option").style.display="flex";else add(id)}
-function dressAdd(){let c=color.value,s=size.value;if(!c||!s){alert("রঙ ও সাইজ নির্বাচন করুন।");return}add("dress",c,s);closeM("option")}
-function add(id,c="",s=""){let key=P[id].type==="dress"?id+"__"+c+"__"+s:id;if(!cart[key])cart[key]={id,qty:0,color:c,size:s};cart[key].qty++;updateCount();alert("পণ্যটি কার্টে যোগ হয়েছে।")}
-function updateCount(){count.textContent=Object.values(cart).reduce((a,x)=>a+x.qty,0)}
-function variant(x){let p=P[x.id];return p.type==="dress"?`রঙ: ${x.color} | সাইজ: ${x.size}`:p.type==="paste"?`${p.country} | ${p.size}`:"১০W LED | মোবাইল চার্জিং"}
-function sub(){return Object.values(cart).reduce((a,x)=>a+P[x.id].price*x.qty,0)}
-function wt(){return Object.values(cart).reduce((a,x)=>a+P[x.id].weight*x.qty,0)}
-function del(){return delivery.value==="outside"?180:80}
-function extra(){return wt()>1?Math.ceil(wt()-1)*30:0}
-function showCart(){let h="";for(let k in cart){let x=cart[k],p=P[x.id];h+=`<div class="cartitem"><b>${p.name}</b><br>${variant(x)}<br>৳${p.price} × ${x.qty}<div class="qty"><button onclick="change('${k}',-1)">−</button> ${x.qty} <button onclick="change('${k}',1)">+</button> <button class="remove" onclick="removeItem('${k}')">মুছুন</button></div></div>`}items.innerHTML=h||"<p>কার্ট খালি।</p>";cartTotal.innerHTML=`পণ্যের মূল্য: ৳${sub()}<br>ডেলিভারি: ৳${del()}<br>অতিরিক্ত ওজন: ৳${extra()}<br><b>মোট: ৳${sub()+del()+extra()}</b>`}
-function change(k,n){cart[k].qty+=n;if(cart[k].qty<=0)delete cart[k];updateCount();showCart();orderTotal()}
-function removeItem(k){delete cart[k];updateCount();showCart();orderTotal()}
-function openCart(){showCart();document.getElementById("cart").style.display="flex"}
-function orderOpen(){if(!Object.keys(cart).length){alert("কার্টে কোনো পণ্য নেই।");return}closeM("cart");document.getElementById("order").style.display="flex";orderTotal()}
-function orderTotal(){if(document.getElementById("ototal"))ototal.innerHTML=`পণ্যের মূল্য: ৳${sub()}<br>ডেলিভারি: ৳${del()}<br>অতিরিক্ত ওজন: ৳${extra()}<br><b>সর্বমোট: ৳${sub()+del()+extra()}</b>`}
-function closeM(id){document.getElementById(id).style.display="none"}
+let cart={};
+let chosen="";
 
-function productLines(){return Object.values(cart).map(x=>{let p=P[x.id],u="https://onelineshopping.github.io/One-line-shopping-shop/"+encodeURIComponent(p.image);return `• ${p.name} | ${variant(x)} | Qty ${x.qty} | ৳${p.price*x.qty}\n  ছবি: ${u}`}).join("\n")}
+
+function render(q=""){
+
+  q=q.toLowerCase();
+
+  let h="";
+
+  for(let id in P){
+
+    let p=P[id];
+
+    let t=(
+      p.name+" "+
+      (p.country||"")+" "+
+      (p.size||"")
+    ).toLowerCase();
+
+    if(q && !t.includes(q)) continue;
+
+    let v=
+      p.type==="dress"
+      ?"🎨 রঙ + 📏 সাইজ নির্বাচন করুন"
+      :
+      p.type==="paste"
+      ?p.country+" • "+p.size
+      :
+      "💡 ১০W LED • মোবাইল চার্জিং • প্রায় ৩–৪ ঘণ্টা আলো";
+
+    h+=`
+
+    <div class="card">
+
+      <img
+        src="${p.image}"
+        alt="${p.name}"
+      >
+
+      <div class="body">
+
+        <h2>
+          ${p.type==="paste"?p.country+" ":""}
+          ${p.name}
+        </h2>
+
+        <div>${v}</div>
+
+        <p>
+          <span class="old">৳${p.old}</span>
+          <span class="price">৳${p.price}</span>
+        </p>
+
+        <span class="discount">
+          ${p.type==="light"?"৩০% ছাড়":"৳৫০ ছাড়"}
+        </span>
+
+        <button
+          class="order"
+          onclick="addStart('${id}')"
+        >
+          🛍️ অর্ডার নাও
+        </button>
+
+      </div>
+
+    </div>
+
+    `;
+
+  }
+
+  document.getElementById("products").innerHTML=h;
+}
+
+
+function addStart(id){
+
+  chosen=id;
+
+  if(P[id].type==="dress"){
+
+    document.getElementById("option").style.display="flex";
+
+  }else{
+
+    add(id);
+
+  }
+
+}
+
+
+function dressAdd(){
+
+  let c=color.value;
+  let s=size.value;
+
+  if(!c || !s){
+
+    alert("রঙ ও সাইজ নির্বাচন করুন।");
+    return;
+
+  }
+
+  add("dress",c,s);
+
+  closeM("option");
+}
+
+
+function add(id,c="",s=""){
+
+  let key=
+    P[id].type==="dress"
+    ?id+"__"+c+"__"+s
+    :id;
+
+  if(!cart[key]){
+
+    cart[key]={
+      id:id,
+      qty:0,
+      color:c,
+      size:s
+    };
+
+  }
+
+  cart[key].qty++;
+
+  updateCount();
+
+  /*
+    গুরুত্বপূর্ণ:
+    আগের "পণ্যটি কার্টে যোগ হয়েছে" alert নেই।
+    অর্ডার নাও চাপলে সরাসরি অর্ডার ফর্ম খুলবে।
+  */
+
+  orderOpen();
+
+}
+
+
+function updateCount(){
+
+  count.textContent=
+    Object.values(cart)
+    .reduce((a,x)=>a+x.qty,0);
+
+}
+
+
+function variant(x){
+
+  let p=P[x.id];
+
+  if(p.type==="dress"){
+
+    return `রঙ: ${x.color} | সাইজ: ${x.size}`;
+
+  }
+
+  if(p.type==="paste"){
+
+    return `${p.country} | ${p.size}`;
+
+  }
+
+  return "১০W LED | মোবাইল চার্জিং";
+
+}
+
+
+function sub(){
+
+  return Object.values(cart)
+    .reduce(
+      (a,x)=>a+P[x.id].price*x.qty,
+      0
+    );
+
+}
+
+
+function wt(){
+
+  return Object.values(cart)
+    .reduce(
+      (a,x)=>a+P[x.id].weight*x.qty,
+      0
+    );
+
+}
+
+
+function del(){
+
+  return delivery.value==="outside"
+    ?180
+    :80;
+
+}
+
+
+function extra(){
+
+  return wt()>1
+    ?Math.ceil(wt()-1)*30
+    :0;
+
+}
+
+
+function showCart(){
+
+  let h="";
+
+  for(let k in cart){
+
+    let x=cart[k];
+    let p=P[x.id];
+
+    h+=`
+
+    <div class="cartitem">
+
+      <b>${p.name}</b>
+      <br>
+
+      ${variant(x)}
+      <br>
+
+      ৳${p.price} × ${x.qty}
+
+      <div class="qty">
+
+        <button onclick="change('${k}',-1)">
+          −
+        </button>
+
+        ${x.qty}
+
+        <button onclick="change('${k}',1)">
+          +
+        </button>
+
+        <button
+          class="remove"
+          onclick="removeItem('${k}')"
+        >
+          মুছুন
+        </button>
+
+      </div>
+
+    </div>
+
+    `;
+
+  }
+
+  items.innerHTML=
+    h || "<p>কার্ট খালি।</p>";
+
+  cartTotal.innerHTML=`
+
+    পণ্যের মূল্য: ৳${sub()}<br>
+    ডেলিভারি: ৳${del()}<br>
+    অতিরিক্ত ওজন: ৳${extra()}<br>
+    <b>মোট: ৳${sub()+del()+extra()}</b>
+
+  `;
+
+}
+
+
+function change(k,n){
+
+  cart[k].qty+=n;
+
+  if(cart[k].qty<=0){
+
+    delete cart[k];
+
+  }
+
+  updateCount();
+  showCart();
+  orderTotal();
+
+}
+
+
+function removeItem(k){
+
+  delete cart[k];
+
+  updateCount();
+  showCart();
+  orderTotal();
+
+}
+
+
+function openCart(){
+
+  showCart();
+
+  document.getElementById("cart").style.display="flex";
+
+}
+
+
+function orderOpen(){
+
+  if(!Object.keys(cart).length){
+
+    alert("কার্টে কোনো পণ্য নেই।");
+    return;
+
+  }
+
+  closeM("cart");
+
+  document.getElementById("order").style.display="flex";
+
+  orderTotal();
+
+}
+
+
+function orderTotal(){
+
+  if(document.getElementById("ototal")){
+
+    ototal.innerHTML=`
+
+      পণ্যের মূল্য: ৳${sub()}<br>
+      ডেলিভারি: ৳${del()}<br>
+      অতিরিক্ত ওজন: ৳${extra()}<br>
+      <b>সর্বমোট: ৳${sub()+del()+extra()}</b>
+
+    `;
+
+  }
+
+}
+
+
+function closeM(id){
+
+  document.getElementById(id).style.display="none";
+
+}
+
+
+function productLines(){
+
+  return Object.values(cart)
+
+    .map(x=>{
+
+      let p=P[x.id];
+
+      let u=
+        "https://onelineshopping.github.io/One-line-shopping-shop/"+
+        encodeURIComponent(p.image);
+
+      return `• ${p.name} | ${variant(x)} | Qty ${x.qty} | ৳${p.price*x.qty}
+  ছবি: ${u}`;
+
+    })
+
+    .join("\n");
+
+}
+
+
 function submitOrder(){
-let n=name.value.trim(),ph=phone.value.trim(),ad=address.value.trim();if(!n||!ph||!ad){alert("নাম, যোগাযোগ নম্বর ও সম্পূর্ণ ঠিকানা দিন।");return}
-let id="OSS-"+Date.now().toString().slice(-8),total=sub()+del()+extra(),area=delivery.value==="outside"?"ঢাকার বাইরে":"ঢাকার ভিতরে";
-let msg=`🛒 Online Shopping Shop — নতুন অর্ডার\nঅর্ডার ID: ${id}\n\n${productLines()}\n\n👤 নাম: ${n}\n📞 ফোন: ${ph}\n🏠 সম্পূর্ণ ঠিকানা: ${ad}\n📍 গ্রাম/এলাকা: ${village.value}\n🏢 থানা/উপজেলা: ${thana.value}\n🏙️ জেলা: ${district.value}\n📮 পোস্ট: ${post.value}\n🚚 ডেলিভারি: ${area}\n📝 নোট: ${note.value}\n\nপণ্যের মূল্য: ৳${sub()}\nডেলিভারি: ৳${del()}\nঅতিরিক্ত ওজন: ৳${extra()}\n💰 সর্বমোট: ৳${total}\n💵 Cash on Delivery`;
-successText.innerHTML=`অর্ডার ID: <b>${id}</b><br>সর্বমোট: <b>৳${total}</b>`;wa.onclick=()=>window.open("https://wa.me/8801410153135?text="+encodeURIComponent(msg),"_blank");closeM("order");document.getElementById("success").style.display="flex"}
+
+  let n=name.value.trim();
+  let ph=phone.value.trim();
+  let ad=address.value.trim();
+
+  if(!n || !ph || !ad){
+
+    alert(
+      "নাম, যোগাযোগ নম্বর ও সম্পূর্ণ ঠিকানা দিন।"
+    );
+
+    return;
+
+  }
+
+  let id=
+    "OSS-"+
+    Date.now()
+    .toString()
+    .slice(-8);
+
+  let total=
+    sub()+del()+extra();
+
+  let area=
+    delivery.value==="outside"
+    ?"ঢাকার বাইরে"
+    :"ঢাকার ভিতরে";
+
+  let msg=`
+
+🛒 Online Shopping Shop — নতুন অর্ডার
+
+অর্ডার ID: ${id}
+
+${productLines()}
+
+👤 নাম: ${n}
+📞 ফোন: ${ph}
+🏠 সম্পূর্ণ ঠিকানা: ${ad}
+📍 গ্রাম/এলাকা: ${village.value}
+🏢 থানা/উপজেলা: ${thana.value}
+🏙️ জেলা: ${district.value}
+📮 পোস্ট: ${post.value}
+🚚 ডেলিভারি: ${area}
+📝 নোট: ${note.value}
+
+পণ্যের মূল্য: ৳${sub()}
+ডেলিভারি: ৳${del()}
+অতিরিক্ত ওজন: ৳${extra()}
+
+💰 সর্বমোট: ৳${total}
+
+💵 Cash on Delivery
+`;
+
+  successText.innerHTML=`
+
+    অর্ডার ID: <b>${id}</b>
+    <br>
+    সর্বমোট: <b>৳${total}</b>
+
+  `;
+
+  wa.onclick=()=>{
+
+    window.open(
+      "https://wa.me/8801410153135?text="+
+      encodeURIComponent(msg),
+      "_blank"
+    );
+
+  };
+
+  closeM("order");
+
+  document.getElementById("success").style.display="flex";
+
+}
+
+
 render();
-</script></body></html>
+
+</script>
+
+</body>
+</html>
